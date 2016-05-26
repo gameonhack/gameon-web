@@ -5,3 +5,9 @@ block content
   h1= title
   p Welcome to #{title}
   
+  ul
+  each group in groups
+    li #{group.get("name")}
+      if group.get("icon")
+        img(src=group.get("icon")._url )
+        

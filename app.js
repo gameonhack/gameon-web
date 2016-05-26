@@ -1,3 +1,4 @@
+require('app-module-path').addPath(__dirname + '/helpers');
 var Parse = require('parse/node');
 var express = require('express');
 var path = require('path');
