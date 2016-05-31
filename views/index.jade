@@ -9,5 +9,6 @@ block content
   each group in groups
     li #{group.get("name")}
       if group.get("icon")
-        img(src=group.get("icon")._url )
+        a(href='/groups/' + group.id)
+          img(src=group.get("icon")._url )
         
