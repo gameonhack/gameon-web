@@ -1,0 +1,96 @@
+extends layout
+
+block content
+  
+  h1= title
+  
+  section(class="card")
+    h1 Card Example
+    p(class="small") Small Text
+    p This is a card. A Section tag with class name <b>card</b>. Most of the data should be contained inside a Card.
+    code &lt;section class="card"&gt;&lt;/section&gt;
+    
+  section(class="card")
+    div(class="col-6")
+      h1 Columns Example
+      p(class="small") Small Text
+      p Use <b>col-n</b>, <i>n</i> is the percentage width of the column. Columns have to be used inside tags with <b>cards</b> class or tags with <i>overflow:auto</i> style. 
+      code &lt;section class="card"&gt; <br>
+        &nbsp &lt;div class="col-7"&gt;&lt;/div&gt;  <br>
+        &nbsp &lt;div class="col-3"&gt;&lt;/div&gt;  <br>
+        &lt;/section&gt;
+      p In this example col-7 is 70% of the witdh. 
+      p To add margins to your column use <b>col-m-n</b>, <i>n</i> is the percentage for left and right margin.
+    div(class="col-2 col-m-2")
+      img(class="centervertical", src="/images/gohackathon-logo.svg")
+  
+  section(class="card")
+    img(class="cover", src="/images/rectangle.png")
+    h1 Cover Image
+    p A cover image fills the card's width and calculate it's height.
+    code &lt;section class="card"&gt; <br>
+      &nbsp &lt;img class="cover" src="/images/rectangle.png"&gt; <br>
+      &lt;/section&gt;
+    
+  section(class="cardgroup")  
+    
+    section(class="group")
+      div(class="square")
+        img(class="cover", src="/images/square.png")
+      h1 Card Group 1
+      p A <b>cardgroup</b> display a group of cards.
+      
+    section(class="group")
+      div(class="square")
+        img(class="cover", src="/images/square.png")
+      h1 Card Group 2
+      p Instead of using card, use a cardgroup.
+      
+    section(class="group")
+      div(class="square")
+        img(class="cover", src="/images/square.png")
+      h1 Card Group 3
+      p Inside a cardgroup create a block with class <b>group</b>.
+      
+    section(class="group")
+      div(class="square")
+        img(class="cover", src="/images/square.png")
+      h1 Card Group 4
+      p cardgroup shows 4 columns or 1 if the device is small.
+      
+  section(class="card")
+    h1 Extra
+        
+    h2 Small Text
+    p <b>small</b> class is used to set small text. Usally secondary text.
+    p 
+      span(class="small", href="#") Small text
+    code &lt;span&gt;Small text&lt;/span&gt;
+    
+    h2 Blue Text
+    p If you need a blue text use the class blue.
+    p 
+      span(class="blue", href="#") Blue text
+    code &lt;a class="blue" href="#"&gt;Blue text&lt;/a&gt;
+    
+    h2 Center vertical
+    div(class="col-1  col-m-1")
+      img(class="centervertical", src="/images/gohack_icon.svg")
+    div(class="col-7 col-m-1")
+      p <b>centervertical</b> class is used to center vertically an element.
+      code &lt;section class="card"&gt; <br>
+        &nbsp &lt;div class="col-7"&gt;&lt;/div&gt;  <br>
+        &nbsp &lt;div class="col-3"&gt;&lt;/div&gt;  <br>
+        &lt;/section&gt;
+    
+    h2 Square
+    div(class="col-2")
+      div(class="square")
+        img(class="cover", src="/images/square.png")  
+    div(class="col-7 col-m-1")
+      p <b>square</b> class is used to create squares.
+      code &lt;section class="card"&gt; <br>
+        &nbsp &lt;div class="col-7"&gt;&lt;/div&gt;  <br>
+        &nbsp &lt;div class="col-3"&gt;&lt;/div&gt;  <br>
+        &lt;/section&gt;
+    

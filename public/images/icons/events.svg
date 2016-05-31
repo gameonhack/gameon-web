@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3421.542 50.541 25 25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #878a8c;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #808385;
+      }
+
+      .cls-1:hover, .cls-2:hover, .cls-3:hover {
+        fill: #E74C3C;
+      }
+
+    </style>
+  </defs>
+  <g id="_1f55a" data-name="1f55a" transform="translate(3419.541 48.541)">
+    <circle id="ellipse" class="cls-1" cx="12.5" cy="12.5" r="12.5" transform="translate(2 2)"/>
+    <g id="group" transform="translate(9.917 3.667)">
+      <path id="path" class="cls-2" d="M30,6h1.667V19.333H30Z" transform="translate(-26.25 -6)"/>
+      <path id="path-2" data-name="path" class="cls-2" d="M27.667,24.362l-1.493.8L21,16.8l1.493-.8Z" transform="translate(-21 -11.833)"/>
+      <circle id="ellipse-2" data-name="ellipse" class="cls-2" cx="1.667" cy="1.667" r="1.667" transform="translate(2.917 9.167)"/>
+    </g>
+    <circle id="ellipse-3" data-name="ellipse" class="cls-3" cx="1.25" cy="1.25" r="1.25" transform="translate(13.25 13.25)"/>
+  </g>
+</svg>

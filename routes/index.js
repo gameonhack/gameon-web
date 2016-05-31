@@ -13,4 +13,10 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/design', function(req, res, next) {
+
+  res.render('design', { title: 'Design Guideline' });
+
+});
+
 module.exports = router;
