@@ -47,9 +47,12 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
+    var query = require('url').parse(req.url,true).query;
+    var shouldloadlayout = query.shouldloadlayout == undefined ? true : query.shouldloadlayout;
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
+      shouldLoadLayout: shouldloadlayout,
       error: err
     });
   });
@@ -59,8 +62,11 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+  var query = require('url').parse(req.url,true).query;
+  var shouldloadlayout = query.shouldloadlayout == undefined ? true : query.shouldloadlayout;
   res.render('error', {
     message: err.message,
+    shouldLoadLayout: shouldloadlayout,
     error: {}
   });
 });

@@ -12,11 +12,6 @@
       .cls-3 {
         fill: #808385;
       }
-
-      .cls-1:hover, .cls-2:hover, .cls-3:hover {
-        fill: #E74C3C;
-      }
-
     </style>
   </defs>
   <g id="_1f55a" data-name="1f55a" transform="translate(3419.541 48.541)">

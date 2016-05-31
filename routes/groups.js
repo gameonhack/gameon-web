@@ -1,22 +1,25 @@
 var express = require('express');
-var router = express.Router();
 
 var dataManager = require('datamanager');
+var gohrouter = require('gohrouter');
+gohrouter.router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.redirect("/");
+gohrouter.get('/', function(req, res, next) {
+  dataManager.getGroups(function (results) {
+    res.gohrender('groups', { title: 'Groups', groups :  results });
+  } )
 });
 
 
-router.get('/:id', function(req, res, next) {
+gohrouter.get('/:id', function(req, res, next) {
 
   dataManager.findGroups({"objectId" : req.params.id}, function (results) {
 
-    res.render('index', { title: 'Express', groups :  results });
+    res.gohrender('groups', { title: 'Groups', groups :  results });
   } )
 
 });
 
 
-module.exports = router;
+module.exports = gohrouter.router;

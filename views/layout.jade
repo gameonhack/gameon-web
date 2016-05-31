@@ -1,10 +1,14 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    include general/header
-    main
-      block content
-    include general/footer
+if shouldLoadLayout == true
+  doctype html
+  html
+    head
+      title= title
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      script(src="/javascripts/pageloader.js")
+    body
+      include general/header
+      main
+        block content
+      include general/footer
+else 
+  block content

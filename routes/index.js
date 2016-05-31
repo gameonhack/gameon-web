@@ -1,22 +1,16 @@
 var express = require('express');
-var router = express.Router();
 
 var dataManager = require('datamanager');
-
+var gohrouter = require('gohrouter');
+gohrouter.router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  dataManager.getGroups(function (results) {
-
-    res.render('index', { title: 'Express', groups :  results });
-  } )
-
+gohrouter.get('/', function(req, res, next) {
+  res.gohrender('index', { title: 'Game On! Hackathon' });
 });
 
-router.get('/design', function(req, res, next) {
-
-  res.render('design', { title: 'Design Guideline' });
-
+gohrouter.get('/design',function(req, res, next) {
+  res.gohrender('design', { title: 'Design Guideline' })
 });
 
-module.exports = router;
+module.exports = gohrouter.router;

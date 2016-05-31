@@ -2,7 +2,6 @@ var Parse = require('parse/node');
 
 module.exports = {
 
-
   /**
    * anonymous function - description
    *

@@ -116,6 +116,7 @@ footer img{
 }
 .card p:not(.small), .cardgroup p:not(.small) {
   color: #5F5F5F;
+  line-height: 22px;
 }
 
 .cardgroup .group {
