@@ -60,5 +60,47 @@ module.exports = {
    */
   getGroups : function (callback) {
     module.exports.findGroups({}, callback)
+  },
+
+
+  findEventsOrderBy : function (where, ascending, key, callback) {
+    var Event = Parse.Object.extend("Event");
+
+    var query = new Parse.Query(Event);
+
+    var key;
+    for (key in where) {
+      query.equalTo(key, where[key] )
+    }
+
+    if (ascending) {
+      query.ascending(key)
+    } else {
+      query.descending(key)
+    }
+
+    query.find({
+      success: function(results) {
+        console.log("Successfully retrieved " + results.length + " objects.");
+        // Do something with the returned Parse.Object values
+        callback(results)
+      },
+      error: function(error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+    });
+  },
+
+
+  findEvents : function (where, callback) {
+    module.exports.findEventsOrderBy(where, false, "createdAt", callback)
+  },
+
+
+  getEvents : function (callback) {
+    module.exports.findEvents({}, callback)
   }
+
+
+
 }

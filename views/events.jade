@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+  h1= title
+  p Welcome to #{title}
+
+  ul
+  each event in events
+    section(class="card")
+      div
+        h1 #{event.get("title")}
+      div
+        if event.get("icon")
+          a(href='/events/' + event.id)
+            img(src=event.get("icon")._url width="100" height="auto")

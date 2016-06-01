@@ -16,7 +16,6 @@ module.exports = {
         object.shouldLoadLayout = module.exports.shouldLoadLayout(req)
         res.render(page, object);
       }
-
       callback(req, res, next)
     });
   }
