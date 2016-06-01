@@ -1,3 +1,13 @@
+/**
+* @Author: Eduardo Irías <eduardo22i>
+* @Date:   2016-05-30T18:14:13-06:00
+* @Project: GOHackathon
+* @Last modified by:   eduardo22i
+* @Last modified time: 2016-05-31T18:35:40-06:00
+*/
+
+
+
 require('app-module-path').addPath(__dirname + '/helpers');
 var Parse = require('parse/node');
 var express = require('express');

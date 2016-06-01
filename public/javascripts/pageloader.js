@@ -1,3 +1,13 @@
+/**
+* @Author: Eduardo Irías <eduardo22i>
+* @Date:   2016-05-31T10:57:57-06:00
+* @Project: GOHackathon
+* @Last modified by:   eduardo22i
+* @Last modified time: 2016-05-31T18:35:25-06:00
+*/
+
+
+
 function loadPage(page) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {

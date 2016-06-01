@@ -1,3 +1,13 @@
+/**
+* @Author: Eduardo Irías <eduardo22i>
+* @Date:   2016-05-26T02:04:04-06:00
+* @Project: GOHackathon
+* @Last modified by:   eduardo22i
+* @Last modified time: 2016-05-31T18:33:40-06:00
+*/
+
+
+
 var Parse = require('parse/node');
 
 module.exports = {
