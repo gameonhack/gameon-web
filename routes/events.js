@@ -1,6 +1,6 @@
 /**
 * @Date:   2016-05-31T19:31:56-06:00
-* @Last modified time: 2016-05-31T20:20:33-06:00
+* @Last modified time: 2016-06-01T17:08:50-06:00
 */
 
 
@@ -22,9 +22,11 @@ gohrouter.get('/', function(req, res, next) {
 gohrouter.get('/:id', function(req, res, next) {
 
   dataManager.findEvents({"objectId" : req.params.id}, function (results) {
-
-    res.gohrender('events', { title: 'Events', events :  results });
-  } )
+    var event = results[0];
+    dataManager.findSchedules({"event" : event}, function (results) {
+      res.gohrender('event', { title: 'Events', event : event, schedules : results });
+    })
+  })
 
 });
 
