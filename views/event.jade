@@ -7,13 +7,13 @@ block content
   section(class="card")
     img(class="cover", src=event.get("icon")._url)    
     p #{event.get("caption")}
-      
     
   section(class="card")
     h1 Schedules
+    p(class="small") 
+      +printDate( event.get('date') )
+      
     if schedules.length > 0
-      p(class="small") 
-        script printDate("#{event.get('date')}" )
       each schedule in schedules
         h2=  schedule.get("name")
     else 

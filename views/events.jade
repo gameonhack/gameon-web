@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  - var months =["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   each event in events
     section(class="card")
       div
         h1 #{event.get("title")}
       div
         div(class = "col-8")
-          p(class="small") #{months[event.get("date").getMonth()] + " " + event.get("date").getDay() + ", " + event.get("date").getFullYear()}
+          p(class="small")
+            +printDate( event.get('date') )
           p #{event.get("caption")}
         div(class = "col-2 centerhorizontal")
           if event.get("icon")
