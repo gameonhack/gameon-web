@@ -1,3 +1,9 @@
 mixin printDate(date)
   - var months =["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   span= months[date.getMonth()] + " " + date.getDay() + ", " + date.getFullYear()
+
+mixin printHour(date)
+  if date.getMinutes()>10
+    span= date.getHours()+":"+date.getMinutes()
+  else
+    span= date.getHours()+":0"+date.getMinutes()

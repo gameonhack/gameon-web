@@ -20,14 +20,12 @@ gohrouter.get('/', function(req, res, next) {
 
 
 gohrouter.get('/:id', function(req, res, next) {
-
   dataManager.findEvents({"objectId" : req.params.id}, function (results) {
     var event = results[0];
     dataManager.findSchedules({"event" : event}, function (results) {
       res.gohrender('event', { title: 'Events', event : event, schedules : results });
     })
   })
-
 });
 
 

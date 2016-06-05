@@ -94,7 +94,6 @@ footer img{
   width: 40px;
 }
 
-
 .card, .cardgroup {
   width: 90%;
   max-width: 900px;
@@ -168,8 +167,23 @@ footer img{
   text-align: center;
 }
 
+.centerright{
+   text-align: right;
+}
+
+.crop {
+    height: 300px;
+    width: auto;
+    overflow: hidden;
+    position: relative;
+}
+
 .cover {
   width: 100%;
+  position: absolute;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
 }
 
 .square {
@@ -246,4 +260,8 @@ a:hover {
 }
 a:visited {
   color: inherit;
+}
+
+button{
+  margin-left:10px;
 }

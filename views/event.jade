@@ -1,11 +1,26 @@
 extends layout
 
 block content
-  
+  script.
+    $(document).ready(function(){
+      $('.viewdetails').click(function () {
+          var rowindex = $(this).closest('tr').next('tr')
+          if($(rowindex).css('display') == 'none' ){
+            rowindex.show();
+          }else{
+            rowindex.hide();
+          }
+        });
+    });
+      
   h1 #{event.get("title")}
   
   section(class="card")
-    img(class="cover", src=event.get("icon")._url)    
+    div(class="crop")
+      img(class="cover", src=event.get("banner")._url)
+    div(class="centerright")
+        p #{event.get("price")} LPS   
+          button GET TICKETS    
     p #{event.get("caption")}
     
   section(class="card")
@@ -14,8 +29,20 @@ block content
       +printDate( event.get('date') )
       
     if schedules.length > 0
-      each schedule in schedules
-        h2=  schedule.get("name")
+      table
+        each schedule in schedules
+          tr
+            td
+              p(class="small") 
+                +printHour( schedule.get('date') )
+            td
+              h2= schedule.get('name')
+            td
+              button(class="viewdetails") +
+          tr(style="display: none")
+            td
+              p= schedule.get('details')
     else 
       p No events :(
+        
       
