@@ -109,10 +109,7 @@ module.exports = {
 
   getEvents : function (callback) {
     module.exports.findEvents({}, callback)
-  } , 
-
-
-
+  },
 
   findSchedulesOrderBy : function (where, ascending, key, callback) {
     var Event = Parse.Object.extend("Schedule");
@@ -150,7 +147,42 @@ module.exports = {
 
   getSchedules : function (callback) {
     module.exports.findSchedules({}, callback)
-  }
+  },
 
+  findGamesOrderBy : function (where, ascending, key, callback) {
+    var Game = Parse.Object.extend("Game");
+
+    var query = new Parse.Query(Game);
+
+    var key;
+    for (key in where) {
+      query.equalTo(key, where[key] )
+    }
+
+    if (ascending) {
+      query.ascending(key)
+    } else {
+      query.descending(key)
+    }
+
+    query.find({
+      success: function(results) {
+        console.log("Successfully retrieved " + results.length + " objects.");
+        // Do something with the returned Parse.Object values
+        callback(results)
+      },
+      error: function(error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+    });
+  },
+
+  findGames : function (where, callback) {
+    module.exports.findGamesOrderBy(where, false, "createdAt", callback)
+  },
+
+  getGames : function (callback) {
+    module.exports.findGames({}, callback)
+  }
 
 }

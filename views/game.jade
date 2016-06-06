@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+  h1= game.get("name")
+  
+  section(class="card")
+    div(class="col-3")
+      div(class="crop")
+        img(src=game.get("icon")._url class="banner")
+    div(class="col-6 col-m-1")
+      h1 #{game.get("group").id}
+      p(class="small")
+        +printDate(game.createdAt)
+      h1 #{game.get("price")} Lps
+      p #{game.get("description")}
+    

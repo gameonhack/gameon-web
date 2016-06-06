@@ -17,7 +17,7 @@ block content
   
   section(class="card")
     div(class="crop")
-      img(class="cover", src=event.get("banner")._url)
+      img(class="banner", src=event.get("banner")._url)
     div(class="centerright")
         p #{event.get("price")} LPS   
           button GET TICKETS    
@@ -33,8 +33,8 @@ block content
         each schedule in schedules
           tr
             td
-              p(class="small") 
-                +printHour( schedule.get('date') )
+                p(class="small") 
+                  +printHour( schedule.get('date') )
             td
               h2= schedule.get('name')
             td

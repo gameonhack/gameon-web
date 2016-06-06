@@ -173,16 +173,22 @@ footer img{
 
 .crop {
     height: 300px;
-    width: auto;
     overflow: hidden;
     position: relative;
+
 }
 
 .cover {
   width: 100%;
+}
+
+.banner {
+  width: 100%;
   position: absolute;
   top: -100%;
   bottom: -100%;
+  left: -100%;
+  right: -100%;
   margin: auto;
 }
 
