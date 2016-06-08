@@ -2,8 +2,8 @@
 * @Author: Eduardo Irías <eduardo22i>
 * @Date:   2016-06-01T14:54:46-06:00
 * @Project: GOHackathon
-* @Last modified by:   eduardo22i
-* @Last modified time: 2016-06-01T17:09:10-06:00
+* @Last modified by:   eduardoirias
+* @Last modified time: 2016-06-07T15:53:33-06:00
 */
 
 
@@ -164,7 +164,7 @@ module.exports = {
     } else {
       query.descending(key)
     }
-
+    query.include("group");
     query.find({
       success: function(results) {
         console.log("Successfully retrieved " + results.length + " objects.");

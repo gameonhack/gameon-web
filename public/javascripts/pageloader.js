@@ -1,3 +1,13 @@
+/**
+* @Author: Eduardo Irías <eduardoirias>
+* @Date:   2016-06-07T15:14:45-06:00
+* @Project: Blackformat
+* @Last modified by:   eduardoirias
+* @Last modified time: 2016-06-08T01:23:24-06:00
+*/
+
+
+
 function loadPage(page) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -28,4 +38,24 @@ function fixLinks(incontext){
       links[i].href = "javascript:loadPage('"+curLink+"')"
     }
   }
+
+function expandItem(tagId, sender, type) {
+
+  if (type == null) {
+    type = "block"
+  }
+  var tag = document.getElementById(tagId);
+  console.log(tag.style.maxHeight);
+  if (tag.style.maxHeight == undefined || tag.style.maxHeight == "" ) {
+    tag.style.maxHeight = "0px";
+  }
+  if (tag.style.maxHeight != "0px") {
+    tag.style.maxHeight = "0px";
+    sender.innerHTML = "+"
+  } else {
+    tag.style.maxHeight = "1000px";
+    sender.innerHTML = "-"
+  }
+}
+
 window.onload = function () { fixLinks(null) };

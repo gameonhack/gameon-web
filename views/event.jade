@@ -1,17 +1,6 @@
 extends layout
 
 block content
-  script.
-    $(document).ready(function(){
-      $('.viewdetails').click(function () {
-          var rowindex = $(this).closest('tr').next('tr')
-          if($(rowindex).css('display') == 'none' ){
-            rowindex.show();
-          }else{
-            rowindex.hide();
-          }
-        });
-    });
       
   h1 #{event.get("title")}
   
@@ -29,19 +18,20 @@ block content
       +printDate( event.get('date') )
       
     if schedules.length > 0
-      table
+      table(width="100%")
         each schedule in schedules
           tr
-            td
+            td(width="20%")
                 p(class="small") 
                   +printHour( schedule.get('date') )
-            td
+            td(width="75%")
               h2= schedule.get('name')
-            td
-              button(class="viewdetails") +
-          tr(style="display: none")
-            td
-              p= schedule.get('details')
+            td(width="5%")
+              button(class="viewdetails", onclick="expandItem('tr#{schedule.id}', this)") +
+          tr()
+            td(colspan="3", width="100%")
+              div(class= "hidenCell", id="tr#{schedule.id}")
+                p= schedule.get('details')
     else 
       p No events :(
         

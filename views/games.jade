@@ -11,7 +11,7 @@ block content
             a(href='/games/' + game.id)
               img(class="banner"  src=game.get("icon")._url class=cover)
         h1 #{game.get("name")}
-        a(class = 'blue' href='/groups/' + game.get("group").id) #{game.get("group").id}
+        a(class = 'blue' href='/groups/' + game.get("group").id) #{game.get("group").get("name")}
         
 
         
