@@ -13,7 +13,7 @@ gohrouter.router = express.Router();
 
 /* GET home page. */
 gohrouter.get('/', function(req, res, next) {
-  dataManager.getEvents(function (results) {
+  dataManager.findEventsOrderBy({}, true, "date", function (results) {
     res.gohrender('events', { title: 'Events', events :  results });
   } )
 });
