@@ -16,7 +16,7 @@ gohrouter.router = express.Router();
 
 /* GET home page. */
 gohrouter.get('/', function(req, res, next) {
-  res.gohrender('index', { title: 'Game On! Hackathon' });
+  res.gohrender('index', { title: 'Game On! Hack' });
 });
 
 gohrouter.get('/design',function(req, res, next) {
