@@ -12,6 +12,11 @@ block content
               img(class="banner"  src=game.get("icon")._url class=cover)
         h1 #{game.get("name")}
         a(class = 'blue' href='/groups/' + game.get("group").id) #{game.get("group").get("name")}
-        
-
+    
+  
+  if games.length == 0 
+    section(class="card")
+      img(class= "cover", src="/images/message.jpg")
+      h1 Create a Game
+      p Game creation should be available soon.
         
