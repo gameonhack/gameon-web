@@ -1,0 +1,38 @@
+extends layout
+
+block content
+      
+  h1 #{event.get("title")}
+  
+  section(class="card")
+    div(class="crop")
+      img(class="banner", src=event.get("banner")._url)
+    div(class="centerright")
+        p #{event.get("price")} LPS   
+          button GET TICKETS    
+    p #{event.get("caption")}
+    
+  section(class="card")
+    h1 Schedules
+    p(class="small") 
+      +printDate( event.get('date') )
+      
+    if schedules.length > 0
+      table(width="100%")
+        each schedule in schedules
+          tr
+            td(width="20%")
+                p(class="small") 
+                  +printHour( schedule.get('date') )
+            td(width="75%")
+              h2= schedule.get('name')
+            td(width="5%")
+              button(class="viewdetails", onclick="expandItem('tr#{schedule.id}', this)") +
+          tr()
+            td(colspan="3", width="100%")
+              div(class= "hidenCell", id="tr#{schedule.id}")
+                p= schedule.get('details')
+    else 
+      p No events :(
+        
+      

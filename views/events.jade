@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  each event in events
+    section(class="card")
+      div
+        h1 #{event.get("title")}
+      div
+        div(class = "col-8")
+          p(class="small")
+            +printDate( event.get('date') )
+          p #{event.get("caption")}
+        div(class = "col-2 centerhorizontal")
+          if event.get("icon")
+            a(href='/events/' + event.id)
+              img(src=event.get("icon")._url width="100" height="auto")
+      a(class = 'blue' href='/events/' + event.id) Learn More

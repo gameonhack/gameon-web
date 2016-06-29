@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+  h1= title
+  
+  section(class="cardgroup")
+    each game in games
+      section(class="group")
+        div(class="square")
+            a(href='/games/' + game.id)
+              img(class="banner"  src=game.get("icon")._url class=cover)
+        h1 #{game.get("name")}
+        a(class = 'blue' href='/groups/' + game.get("group").id) #{game.get("group").get("name")}
+        
+
+        
