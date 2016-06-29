@@ -219,6 +219,11 @@ footer img{
   color: #E74C3C;
 }
 
+.centeredImage {
+  display: block;
+  margin: auto;
+}
+
 h1 {
   font-size: 28px;
   font-weight: normal;
