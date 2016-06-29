@@ -1,5 +1,14 @@
+/**
+* @Author: Eduardo Irías <eduardo22i>
+* @Date:   2016-05-31T12:04:33-06:00
+* @Project: GOHackathon
+* @Last modified by:   eduardoirias
+* @Last modified time: 2016-06-05T21:31:15-06:00
+*/
+
+
+
 var express = require('express');
-//var router = express.Router();
 module.exports.router = {}
 
 

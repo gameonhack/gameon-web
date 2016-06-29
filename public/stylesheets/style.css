@@ -1,6 +1,9 @@
 /**
-* @Date:   2016-05-26T16:35:09-06:00
-* @Last modified time: 2016-06-08T01:24:04-06:00
+* @Author: Eduardo Irías <eduardo22i>
+* @Date:   2016-05-20T15:12:29-06:00
+* @Project: GOHackathon
+* @Last modified by:   eduardo22i
+* @Last modified time: 2016-05-31T18:35:31-06:00
 */
 
 
@@ -243,6 +246,11 @@ footer img{
 
 .selected {
   color: #E74C3C;
+}
+
+.centeredImage {
+  display: block;
+  margin: auto;
 }
 
 h1 {

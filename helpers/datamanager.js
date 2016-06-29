@@ -1,9 +1,16 @@
 /**
 * @Author: Eduardo Irías <eduardo22i>
+<<<<<<< HEAD
 * @Date:   2016-06-01T14:54:46-06:00
 * @Project: GOHackathon
 * @Last modified by:   eduardoirias
 * @Last modified time: 2016-06-07T15:53:33-06:00
+=======
+* @Date:   2016-05-26T02:04:04-06:00
+* @Project: GOHackathon
+* @Last modified by:   eduardo22i
+* @Last modified time: 2016-05-31T18:33:40-06:00
+>>>>>>> master
 */
 
 
