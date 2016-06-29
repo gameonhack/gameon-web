@@ -3,8 +3,7 @@ extends layout
 block content
 
   h1= title
-  p Welcome to #{title}
-
+      
   ul
   each group in groups
     section(class="card")
@@ -14,3 +13,9 @@ block content
         if group.get("icon")
           a(href='/groups/' + group.id)
             img(src=group.get("icon")._url width="100" height="auto")
+            
+  if groups.length == 0 
+    section(class="card")
+      img(class= "cover", src="/images/message.jpg")
+      h1 Create a Group
+      p Group creation should be available soon.

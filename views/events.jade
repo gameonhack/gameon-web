@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  
   each event in events
     section(class="card")
       div
@@ -15,3 +16,9 @@ block content
             a(href='/events/' + event.id)
               img(src=event.get("icon")._url width="100" height="auto")
       a(class = 'blue' href='/events/' + event.id) Learn More
+  
+  if events.length == 0 
+    section(class="card")
+      img(class= "cover", src="/images/message.jpg")
+      h1 Stay tuned for new events
+      p We haven't found events in your near area.
