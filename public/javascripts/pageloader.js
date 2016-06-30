@@ -9,17 +9,27 @@
 
 
 function loadPage(page) {
+  var main = document.getElementsByTagName("main")[0]
+  document.getElementById("loading").style.display = "block";
+  main.style.display = "none";
+
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
+
+    if (xhttp.readyState == 4) {
+      document.getElementById("loading").style.display = "none";
+      main.style.display = "block";
+    }
+
     if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-      document.getElementsByTagName("main")[0].innerHTML = xhttp.responseText;
+      main.innerHTML = xhttp.responseText;
       fixLinks(document.getElementsByTagName("main")[0])
 
-     window.history.pushState(null, null, page);
+      window.history.pushState(null, null, page);
     }
     if (xhttp.readyState == 4 && xhttp.status == 404) {
-      document.getElementsByTagName("main")[0].innerHTML = xhttp.responseText;
+      main.innerHTML = xhttp.responseText;
       fixLinks(document.getElementsByTagName("main")[0])
 
       window.history.pushState(null, null, page);

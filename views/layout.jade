@@ -10,7 +10,13 @@ if shouldLoadLayout == true
       //script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
     body
       include general/header
+      div(class="spinner", id="loading", style="display: none") 
+        div(class="dot1")
+        div(class="dot2")
+        
       main
+        
+          
         block content
       include general/footer
 else 
