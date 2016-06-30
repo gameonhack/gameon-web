@@ -14,8 +14,10 @@ gohrouter.get('/', function(req, res, next) {
 gohrouter.get('/:id', function(req, res, next) {
     dataManager.findGames({"objectId" : req.params.id}, function (results) {
       var game = results[0];
-      res.gohrender('game', { title: 'Games', game : game });
-    } )
-});
+      dataManager.findGameDownloads({"game" : game}, function (results) {
+        res.gohrender('game', { title: 'Games', game : game, gamedownloads: results});
+      })
+    })
+  });
 
 module.exports = gohrouter.router;
