@@ -222,5 +222,39 @@ module.exports = {
   },
   getGameDownloads : function (callback) {
     module.exports.findGameDownloads({}, callback)
+  },
+  findSpeakersOrderBy : function (where, ascending, key, callback) {
+    var Speaker = Parse.Object.extend("Speaker");
+
+    var query = new Parse.Query(Speaker);
+
+    var key;
+    for (key in where) {
+      query.equalTo(key, where[key] )
+    }
+
+    if (ascending) {
+      query.ascending(key)
+    } else {
+      query.descending(key)
+    }
+    query.include("schedule");
+    query.include("user");
+    query.find({
+      success: function(results) {
+        console.log("Successfully retrieved " + results.length + " objects.");
+        // Do something with the returned Parse.Object values
+        callback(results)
+      },
+      error: function(error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+    });
+  },
+  findSpeakers : function (where, callback) {
+    module.exports.findSpeakersOrderBy(where, false, "createdAt", callback)
+  },
+  getSpeakers : function (callback) {
+    module.exports.findSpeakers({}, callback)
   }
 }

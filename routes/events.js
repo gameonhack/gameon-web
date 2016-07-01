@@ -23,7 +23,14 @@ gohrouter.get('/:id', function(req, res, next) {
   dataManager.findEvents({"objectId" : req.params.id}, function (results) {
     var event = results[0];
     dataManager.findSchedules({"event" : event}, function (results) {
-      res.gohrender('event', { title: 'Events', event : event, schedules : results });
+      var schedules = results;
+      var speakers;
+      for (var i = 0; i < schedules.length; i++) {
+        dataManager.findSpeakers({"schedule" : schedules[i]}, function (results) {
+          speakers.push(results);
+        })
+      }
+      res.gohrender('event', { title: 'Events', event : event, schedules : schedules, speakers: speakers });
     })
   })
 });
