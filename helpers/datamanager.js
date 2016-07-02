@@ -28,7 +28,7 @@ module.exports = {
    * @param  {Function} callback  description
    * @return {type}               description
    */
-  findGroupsOrderBy : function (where, ascending, key, callback) {
+  findGroupsOrderBy : function (where, ascending, sortkey, callback) {
     var Group = Parse.Object.extend("Group");
 
     var query = new Parse.Query(Group);
@@ -39,9 +39,9 @@ module.exports = {
     }
 
     if (ascending) {
-      query.ascending(key)
+      query.ascending(sortkey)
     } else {
-      query.descending(key)
+      query.descending(sortkey)
     }
 
     query.find({
@@ -80,7 +80,7 @@ module.exports = {
   },
 
 
-  findEventsOrderBy : function (where, ascending, key, callback) {
+  findEventsOrderBy : function (where, ascending, sortkey, callback) {
     var Event = Parse.Object.extend("Event");
 
     var query = new Parse.Query(Event);
@@ -91,9 +91,9 @@ module.exports = {
     }
 
     if (ascending) {
-      query.ascending(key)
+      query.ascending(sortkey)
     } else {
-      query.descending(key)
+      query.descending(sortkey)
     }
 
     query.find({
@@ -118,7 +118,7 @@ module.exports = {
     module.exports.findEvents({}, callback)
   },
 
-  findSchedulesOrderBy : function (where, ascending, key, callback) {
+  findSchedulesOrderBy : function (where, ascending, sortkey, callback) {
     var Event = Parse.Object.extend("Schedule");
     var query = new Parse.Query(Event);
     var key;
@@ -127,9 +127,9 @@ module.exports = {
     }
 
     if (ascending) {
-      query.ascending(key)
+      query.ascending(sortkey)
     } else {
-      query.descending(key)
+      query.descending(sortkey)
     }
 
     query.find({
@@ -223,7 +223,7 @@ module.exports = {
   getGameDownloads : function (callback) {
     module.exports.findGameDownloads({}, callback)
   },
-  findSpeakersOrderBy : function (where, ascending, key, callback) {
+  findSpeakersOrderBy : function (where, ascending, sortkey, callback) {
     var Speaker = Parse.Object.extend("Speaker");
 
     var query = new Parse.Query(Speaker);
@@ -234,9 +234,9 @@ module.exports = {
     }
 
     if (ascending) {
-      query.ascending(key)
+      query.ascending(sortkey)
     } else {
-      query.descending(key)
+      query.descending(sortkey)
     }
     query.include("schedule");
     query.include("user");

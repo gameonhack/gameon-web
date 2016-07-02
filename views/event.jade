@@ -9,35 +9,39 @@ block content
       img(class="banner", src=event.get("banner")._url)
     div(class="centerright")
         p #{event.get("price")} LPS   
-          button GET TICKETS    
+          button(class="default") GET TICKETS    
     p #{event.get("caption")}
     
   section(class="card")
     h1 Schedule
-    p(class="small") 
-      +printDate( event.get('date') )
-      
-    if schedules.length > 0
-      table(width="100%")
-        each schedule in schedules
-          tr
-            td(width="10%")
-              p(class="small") 
-                +printHour( schedule.get('date') )
-            td(width="90%", class="main")
-              = schedule.get('name')
-            td(width="5%")
-              button(class="large blue", onclick="expandItem('tr#{schedule.id}', this), loadPageSegment('/events/#{event.id}/schedule/#{schedule.id}', 'tr#{schedule.id}', false) ") +
-          tr()
-            td(colspan="3", width="100%")
-              div(class= "hidenCell", id="tr#{schedule.id}")
-                div(class="col-1")
-                div(class= "col-9")
-                  p= schedule.get('details')
-                  h2 Speakers
-                div(class="spinner", style="margin: 0px auto 10px auto;")
-                  div(class="dot1")
-                  div(class="dot2")
+    
+    if schedules
+
+      each value, date in schedules
+        
+        p(class="small m-t-4")
+          +printDate( new Date(date) )
+
+          table(width="100%")
+            each schedule in value
+              tr
+                td(width="10%")
+                  p(class="small") 
+                    +printHour( schedule.get('date') )
+                td(width="90%", class="main")
+                  = schedule.get('name')
+                td(width="5%")
+                  button(class="large blue", onclick="expandItem('tr#{schedule.id}', this), loadPageSegment('/events/#{event.id}/schedule/#{schedule.id}', 'tr#{schedule.id}', false) ") +
+              tr()
+                td(colspan="3")
+                  div(class= "hidenCell", id="tr#{schedule.id}")
+                    div(class="col-1")
+                    div(class= "col-9")
+                      p= schedule.get('details')
+                      h2 Speakers
+                    div(class="spinner", style="margin: 0px auto 10px auto;")
+                      div(class="dot1")
+                      div(class="dot2")
     else 
       p No events :(
         
