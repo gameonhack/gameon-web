@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div(class= shouldLoadLayout == true ? 'card' : '')
+    if shouldLoadLayout == true
+      h1= schedule.get('name')
+
+    div(class= shouldLoadLayout == true ? "" : "col-1" )
+    div(class= shouldLoadLayout == true ? "" : "col-9" )
+      p= schedule.get('details')
+      h2 Speakers
+      
+      if speakers.length > 0
+        ul
+          each speaker in speakers
+            li
+              if speaker.get("user")
+                div(class="col-1")
+                  img(class="centervertical clip-circle-3", width="100%", src=speaker.get("user").get("image")._url)
+                div(class="col-8 col-m-1")
+                  p= speaker.get("user").get("name")
+                  if speaker.get("user").get("group")
+                    p(class="small")= speaker.get("user").get("group").get("name")
+      else 
+        p To be announced soon

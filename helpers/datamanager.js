@@ -240,6 +240,8 @@ module.exports = {
     }
     query.include("schedule");
     query.include("user");
+    query.include("user.group");
+
     query.find({
       success: function(results) {
         console.log("Successfully retrieved " + results.length + " objects.");

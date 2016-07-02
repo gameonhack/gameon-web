@@ -13,7 +13,7 @@ block content
     p #{event.get("caption")}
     
   section(class="card")
-    h1 Schedules
+    h1 Schedule
     p(class="small") 
       +printDate( event.get('date') )
       
@@ -21,17 +21,23 @@ block content
       table(width="100%")
         each schedule in schedules
           tr
-            td(width="20%")
-                p(class="small") 
-                  +printHour( schedule.get('date') )
-            td(width="75%")
-              h2= schedule.get('name')
+            td(width="10%")
+              p(class="small") 
+                +printHour( schedule.get('date') )
+            td(width="90%", class="main")
+              = schedule.get('name')
             td(width="5%")
-              button(class="viewdetails", onclick="expandItem('tr#{schedule.id}', this)") +
+              button(class="viewdetails large blue", onclick="expandItem('tr#{schedule.id}', this), loadPageSegment('/events/#{event.id}/schedule/#{schedule.id}', 'tr#{schedule.id}', false) ") +
           tr()
             td(colspan="3", width="100%")
               div(class= "hidenCell", id="tr#{schedule.id}")
-                p= schedule.get('details')
+                div(class="col-1")
+                div(class= "col-9")
+                  p= schedule.get('details')
+                  h2 Speakers
+                div(class="spinner", style="margin: 0px auto 10px auto;")
+                  div(class="dot1")
+                  div(class="dot2")
     else 
       p No events :(
         
