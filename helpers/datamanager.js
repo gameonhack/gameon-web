@@ -120,9 +120,7 @@ module.exports = {
 
   findSchedulesOrderBy : function (where, ascending, key, callback) {
     var Event = Parse.Object.extend("Schedule");
-
     var query = new Parse.Query(Event);
-
     var key;
     for (key in where) {
       query.equalTo(key, where[key] )
@@ -190,6 +188,75 @@ module.exports = {
 
   getGames : function (callback) {
     module.exports.findGames({}, callback)
-  }
+  },
 
+  findGameDownloadsOrderBy : function (where, ascending, key, callback) {
+    var GameDownload = Parse.Object.extend("GameDownload");
+
+    var query = new Parse.Query(GameDownload);
+
+    var key;
+    for (key in where) {
+      query.equalTo(key, where[key] )
+    }
+
+    if (ascending) {
+      query.ascending(key)
+    } else {
+      query.descending(key)
+    }
+    query.include("console");
+    query.find({
+      success: function(results) {
+        console.log("Successfully retrieved " + results.length + " objects.");
+        // Do something with the returned Parse.Object values
+        callback(results)
+      },
+      error: function(error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+    });
+  },
+  findGameDownloads : function (where, callback) {
+    module.exports.findGameDownloadsOrderBy(where, false, "createdAt", callback)
+  },
+  getGameDownloads : function (callback) {
+    module.exports.findGameDownloads({}, callback)
+  },
+  findSpeakersOrderBy : function (where, ascending, key, callback) {
+    var Speaker = Parse.Object.extend("Speaker");
+
+    var query = new Parse.Query(Speaker);
+
+    var key;
+    for (key in where) {
+      query.equalTo(key, where[key] )
+    }
+
+    if (ascending) {
+      query.ascending(key)
+    } else {
+      query.descending(key)
+    }
+    query.include("schedule");
+    query.include("user");
+    query.include("user.group");
+
+    query.find({
+      success: function(results) {
+        console.log("Successfully retrieved " + results.length + " objects.");
+        // Do something with the returned Parse.Object values
+        callback(results)
+      },
+      error: function(error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+    });
+  },
+  findSpeakers : function (where, callback) {
+    module.exports.findSpeakersOrderBy(where, false, "createdAt", callback)
+  },
+  getSpeakers : function (callback) {
+    module.exports.findSpeakers({}, callback)
+  }
 }

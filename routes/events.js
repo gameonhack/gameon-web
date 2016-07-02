@@ -9,6 +9,7 @@ var express = require('express');
 
 var dataManager = require('datamanager');
 var gohrouter = require('gohrouter');
+
 gohrouter.router = express.Router();
 
 /* GET home page. */
@@ -28,5 +29,14 @@ gohrouter.get('/:id', function(req, res, next) {
   })
 });
 
+gohrouter.get('/:id/schedule/:scheduleid/', function(req, res, next) {
+  dataManager.findSchedules({"objectId" : req.params.scheduleid}, function (results) {
+    var schedule = results[0]
+    console.log(schedule);
+    dataManager.findSpeakers({"schedule" : schedule}, function (results) {
+      res.gohrender('schedule', { title: 'Schedule', schedule : schedule, speakers : results });
+    })
+  })
+});
 
 module.exports = gohrouter.router;

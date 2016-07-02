@@ -1,17 +1,23 @@
 extends layout
 
 block content
-
   h1= game.get("name")
-  
   section(class="card")
     div(class="col-3")
       div(class="crop")
         img(src=game.get("icon")._url class="banner")
     div(class="col-6 col-m-1")
-      h1 #{game.get("group").id}
+      h1 #{game.get("group").get("name")}
       p(class="small")
         +printDate(game.createdAt)
       h1 #{game.get("price")} Lps
       p #{game.get("description")}
     
+  section(class="card")  
+    p Downloads
+    if gamedownloads.length > 0
+      div
+        each gamedownload in gamedownloads
+          div(class="col-1")
+            a(href=gamedownload.get("url"))
+              img(src=gamedownload.get("console").get("icon")._url height="50")
