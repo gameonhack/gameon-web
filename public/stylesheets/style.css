@@ -97,6 +97,48 @@ footer img{
   width: 40px;
 }
 
+button {
+  border: none;
+  background: inherit;
+  font-size: 16px;
+  padding: 10px;
+}
+
+button.default {
+  background: #2980B9;
+  color: white;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+button.large {
+  font-size: 24px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0px;
+}
+table {
+  border-collapse: collapse;
+}
+
+table .main {
+  color: #5F5F5F;
+  font-size: 18px;
+}
+table tr:nth-child(even) {
+  border-bottom: 1px #cdcdcd solid;
+}
+
+.bottomBorder {
+  border-bottom: 1px #cdcdcd solid;
+}
 .card, .cardgroup {
   width: 90%;
   max-width: 900px;
@@ -114,6 +156,11 @@ footer img{
   border: #E0E0E0 1px solid;
   border-radius: 5px;
   padding: 20px;
+}
+
+.transparent {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: rgba(0, 0, 0, 0.0) 1px solid;
 }
 
 .card h1, .cardgroup h1 {
@@ -170,6 +217,16 @@ footer img{
   text-align: center;
 }
 
+.nopadding {
+  padding: 0px;
+}
+
+.left{
+  text-align: left;
+}
+.right{
+  text-align: right;
+}
 .centerright{
    text-align: right;
 }
@@ -228,6 +285,18 @@ footer img{
 .col-m-7 {  margin-left: 35%; margin-right: 35%; }
 .col-m-8 {  margin-left: 40%; margin-right: 40%; }
 .col-m-9 {  margin-left: 45%; margin-right: 45%; }
+
+
+.clip-circle-3 {
+  -webkit-clip-path: circle(30px at center);
+  clip-path: circle(30px at center);
+}
+
+.clip-circle-5 {
+  -webkit-clip-path: circle(50px at center);
+  clip-path: circle(50px at center);
+}
+
 
 .spinner {
   margin: 300px auto;
@@ -329,8 +398,4 @@ a:hover {
 }
 a:visited {
   color: inherit;
-}
-
-button{
-  margin-left:10px;
 }

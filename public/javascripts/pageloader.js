@@ -35,7 +35,25 @@ function loadPage(page) {
       window.history.pushState(null, null, page);
     }
   }
-  console.log(page + "?shouldloadlayout=false");
+  xhttp.open("GET", page + "?shouldloadlayout=false", true);
+  xhttp.send();
+}
+
+function loadPageSegment(page, tagId, reLoadPermitted) {
+  var tag = document.getElementById(tagId)
+
+  if (!reLoadPermitted && tag.getAttribute("loaded")) {
+    return
+  }
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+      tag.innerHTML = xhttp.responseText;
+      tag.setAttribute("loaded", true)
+    }
+  }
   xhttp.open("GET", page + "?shouldloadlayout=false", true);
   xhttp.send();
 }
@@ -55,7 +73,6 @@ function expandItem(tagId, sender, type) {
     type = "block"
   }
   var tag = document.getElementById(tagId);
-  console.log(tag.style.maxHeight);
   if (tag.style.maxHeight == undefined || tag.style.maxHeight == "" ) {
     tag.style.maxHeight = "0px";
   }
