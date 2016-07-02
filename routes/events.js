@@ -6,6 +6,7 @@
 
 
 var express = require('express');
+var _ = require('lodash');
 
 var dataManager = require('datamanager');
 var gohrouter = require('gohrouter');
@@ -23,8 +24,14 @@ gohrouter.get('/', function(req, res, next) {
 gohrouter.get('/:id', function(req, res, next) {
   dataManager.findEvents({"objectId" : req.params.id}, function (results) {
     var event = results[0];
-    dataManager.findSchedules({"event" : event}, function (results) {
-      res.gohrender('event', { title: 'Events', event : event, schedules : results });
+    dataManager.findSchedulesOrderBy({"event" : event}, true, "date",  function (schedulesResults) {
+      var groupedByMonth = _.groupBy(schedulesResults, function(item) {
+        var d = item.get("date")
+        var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
+        return  nd;
+      });
+      console.log(groupedByMonth);
+      res.gohrender('event', { title: 'Events', event : event, schedules : groupedByMonth });
     })
   })
 });
@@ -32,7 +39,6 @@ gohrouter.get('/:id', function(req, res, next) {
 gohrouter.get('/:id/schedule/:scheduleid/', function(req, res, next) {
   dataManager.findSchedules({"objectId" : req.params.scheduleid}, function (results) {
     var schedule = results[0]
-    console.log(schedule);
     dataManager.findSpeakers({"schedule" : schedule}, function (results) {
       res.gohrender('schedule', { title: 'Schedule', schedule : schedule, speakers : results });
     })
