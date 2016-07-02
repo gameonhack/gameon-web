@@ -221,9 +221,11 @@ table tr:nth-child(even) {
   padding: 0px;
 }
 
+
 .left{
   text-align: left;
 }
+
 .right{
   text-align: right;
 }
@@ -286,6 +288,11 @@ table tr:nth-child(even) {
 .col-m-8 {  margin-left: 40%; margin-right: 40%; }
 .col-m-9 {  margin-left: 45%; margin-right: 45%; }
 
+.m-t-1 {  margin-top: 10px; }
+.m-t-2 {  margin-top: 20px; }
+.m-t-3 {  margin-top: 30px; }
+.m-t-4 {  margin-top: 40px; }
+.m-t-5 {  margin-top: 50px; }
 
 .clip-circle-3 {
   -webkit-clip-path: circle(30px at center);
