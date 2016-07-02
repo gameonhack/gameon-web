@@ -101,11 +101,19 @@ button {
   border: none;
   background: inherit;
   font-size: 16px;
+  padding: 10px;
+}
+
+button.default {
+  background: #2980B9;
+  color: white;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 button.large {
   font-size: 24px;
-
 }
 
 button:hover {
@@ -148,6 +156,11 @@ table tr:nth-child(even) {
   border: #E0E0E0 1px solid;
   border-radius: 5px;
   padding: 20px;
+}
+
+.transparent {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: rgba(0, 0, 0, 0.0) 1px solid;
 }
 
 .card h1, .cardgroup h1 {
@@ -204,6 +217,16 @@ table tr:nth-child(even) {
   text-align: center;
 }
 
+.nopadding {
+  padding: 0px;
+}
+
+.left{
+  text-align: left;
+}
+.right{
+  text-align: right;
+}
 .centerright{
    text-align: right;
 }

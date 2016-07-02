@@ -27,7 +27,7 @@ block content
             td(width="90%", class="main")
               = schedule.get('name')
             td(width="5%")
-              button(class="viewdetails large blue", onclick="expandItem('tr#{schedule.id}', this), loadPageSegment('/events/#{event.id}/schedule/#{schedule.id}', 'tr#{schedule.id}', false) ") +
+              button(class="large blue", onclick="expandItem('tr#{schedule.id}', this), loadPageSegment('/events/#{event.id}/schedule/#{schedule.id}', 'tr#{schedule.id}', false) ") +
           tr()
             td(colspan="3", width="100%")
               div(class= "hidenCell", id="tr#{schedule.id}")
