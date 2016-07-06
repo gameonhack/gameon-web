@@ -21,15 +21,22 @@ gohrouter.get('/', function(req, res, next) {
   } )
 });
 
-
 gohrouter.get('/:id', function(req, res, next) {
-
   dataManager.findGroups({"objectId" : req.params.id}, function (results) {
-
-    res.gohrender('groups', { title: 'Groups', groups :  results });
-  } )
-
+    var group = results[0];
+    dataManager.findGames({"group" : group}, function (results) {
+      res.gohrender('group', { title: 'Group', group :  group, games : results });
+    })
+  })
 });
 
+gohrouter.get('/:id/game/:gameid/', function(req, res, next) {
+  dataManager.findGames({"objectId" : req.params.gameid}, function (results) {
+    var game = results[0];
+    dataManager.findGameDownloads({"game" : game}, function (results) {
+      res.gohrender('gamedownload', { title: 'Downloads', game : game, gamedownloads : results });
+    })
+  })
+});
 
 module.exports = gohrouter.router;

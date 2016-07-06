@@ -41,11 +41,10 @@ function loadPage(page) {
 
 function loadPageSegment(page, tagId, reLoadPermitted) {
   var tag = document.getElementById(tagId)
-
   if (!reLoadPermitted && tag.getAttribute("loaded")) {
     return
   }
-  
+
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
