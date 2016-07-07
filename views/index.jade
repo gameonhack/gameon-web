@@ -3,48 +3,51 @@ extends layout
 block content
   div(class="nocardrender")
     h1= title
-
-    a(href="/events")
-      section(class="card")
-        div(class="col-3 mainImage")
-          div(class="square")
-            img(class="cover", src="/images/events/gotalks.svg")
-          h1 GO Talks
-            
-        div(class="col-3 col-m-1 mainImage")
-          div(class="square")
-            img(class="cover", src="/images/events/gohackathon.svg") 
-          h1 GO Hackathon   
-
-        div(class="col-3 mainImage")
-          div(class="square ")
-            img(class="cover", src="/images/events/gobattle.svg")
-          h1 GO Battle
         
     section(class="card")
       article
-        h1 ¿Qué es el GAME ON!?
+        h1 ¿Qué es el GAME ON?
         p(class="small") Acerca #{title}
-        p El Game On! es un evento que promueve la creatividad, la sinergia y el emprendimiento. El objetivo de este evento es la creación de videojuegos móviles. En un período de 26 horas, los participantes tendrán la tarea de crear un videojuego móvil; para ello será necesario que varias disciplinas como la programación, el diseño gráfico, la producción audiovisual, la escritura creativa y la mercadotecnia trabajen juntas para crear el mejor producto posible.
-        p Al final de la competencia, tres jurados evaluarán los proyectos y premiarán a tres de ellos. Los ganadores recibirán un premio en efectivo, la mentoría durante los tres meses consecutivos al evento, con el objetivo de finalizar el juego que comenzaron durante el evento y la posibilidad de firmar un contrato de distribución con Tigo, quienes tienen la buena disposición de potenciar los proyectos ganadores utilizando su plataforma de distribución de contenido para móviles, la más grande de Honduras.
-        p Es importante notar que al participar en este evento estás de acuerdo con las reglas oficiales y te comprometés a respetarlas.
+        p El Game On es un innovador evento que promueve la creatividad, la sinergia, y el emprendimiento. El evento se dividirá en tres niveles principales: educativa, competitiva, y recreativa donde se necesitarán conocimientos en los campos de programación, diseño gráfico, producción audiovisual, y marketing, todas éstas involucrándose con el fin de impulsar el desarrollo de videojuegos, y a su vez crear una comunidad de developers.
+        p El primer nivel GO Talks consistirá en un conjunto de charlas y talleres que durarán tres días, del 8 al 10 de Septiembre de 2016, con el propósito de enseñar técnicas adecuadas para la elaboración de videojuegos involucrándose en todos sus campos. El primer día consistirá en arte y diseño una parte fundamental en un videojuego. En el siguiente día se brindaran conocimientos básicos  acerca del tema de programación orientada a videojuegos todo manejado sobre el motor de juegos “Unity”.  El día de cierre de GO Talks se profundizarán temas relacionados con inteligencia artificial, realidad virtual y production de música. Esperamos capacitar a los participantes para el siguiente nivel.
+        p El GO Hackathon es la parte primordial del evento Game On. Es un concurso abierto a todo público donde se deberán formar grupos de 3-5 personas para realizar un videojuego en 48 horas. Los videojuegos creados serán evaluados por un jurado para escoger un ganador en las categorías de: mejor juego de consola, mejor juego móvil y mejor producción audiovisual. 
+        p Por favor revisar las 
+          a(class="blue") bases del concurso.  
+        p El GO Battle es la parte divertida del evento donde se anunciarán los ganadores del GO Hackathon seguido por el lanzamiento de los juegos creados a la venta. También se realizara una serie de torneos de videojuegos como: Fifa 16, Super Smash Bros, Pokemon, entre otros, y se premiaran a los ganadores de estos. Este será el nivel que cerrará el evento Game On.
+        p Nuestro propósito es crear una comunidad que permanezca en constante contacto y así innovar el desarrollo de videojuegos en Honduras.
+        a(href="/events")
+          section(class="card")
+            div(class="col-3 mainImage")
+              div(class="square")
+                img(class="cover", src="/images/events/gotalks.svg")
+              h1 GO Talks
+                
+            div(class="col-3 col-m-1 mainImage")
+              div(class="square")
+                img(class="cover", src="/images/events/gohackathon.svg") 
+              h1 GO Hackathon   
+
+            div(class="col-3 mainImage")
+              div(class="square ")
+                img(class="cover", src="/images/events/gobattle.svg")
+              h1 GO Battle
     
     section(class="card")
-      h1 Contributing 
-      p(class="small") Help create #{title}
+      h1 Contribuciones 
+      p(class="small") Ayúdanos a crear #{title}
       
-      h2 Developer
-      p If you want to participate in the development of GOHack, join us! Please check out our Github page: 
+      h2 Desarrollador
+      p Si quiere participar en el desarrollo del Game On, únete! Échale un vistazo a nuestro repositorio en Github: 
         a(onclick="openURL('https://github.com/gameonhack')", class="blue") https://github.com/gameonhack
         
-      p Please check our Design Guidelines 
-        a(href="/design", class="blue") Learn more
+      p Por favor revisa nuestra 
+        a(href="/design", class="blue") guía de diseño 
       
-      p We are looking for NodeJS Developers 
+      p Buscamos desarrolladores en NodeJS 
         a(onclick="openURL('mailto:info@gameonhack.com')" , class="blue") info@gameonhack.com
       
       h2 Staff
-      p Please contact us at 
+      p Para ser parte del Staff escríbenos a 
         a(onclick="openURL('mailto:info@gameonhack.com')" , class="blue") info@gameonhack.com
     
     
