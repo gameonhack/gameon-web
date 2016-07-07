@@ -1,20 +1,21 @@
 header
-  a(href="/")
+  a(href="/", onclick="selectMenu(this)")
    img(id="logo", class="centervertical", src="/images/gohackathon-logo.svg")
-  ul
-    li
-      a(href="/events")
-        img(src="/images/icons/events.svg")
-        span Eventos
-    li 
-      a(href="/games")
-        img(src="/images/icons/games.svg")
-        span Juegos
-    li
-      a(href="/groups")
-        img(src="/images/icons/groups.svg")
-        span Grupos
-    li
-      a(href="/profile")
-        img(src="/images/icons/profile.svg")
-        span Perfil
+  nav(id="menu")
+    ul
+      li( onclick="selectMenu(this)")
+        a(href="/events")
+          img(src="/images/icons/events.svg")
+          span Eventos
+      li( onclick="selectMenu(this)")
+        a(href="/games")
+          img(src="/images/icons/games.svg")
+          span Juegos
+      li( onclick="selectMenu(this)")
+        a(href="/groups")
+          img(src="/images/icons/groups.svg")
+          span Grupos
+      li( onclick="selectMenu(this)")
+        a(href="/profile")
+          img(src="/images/icons/profile.svg")
+          span Perfil

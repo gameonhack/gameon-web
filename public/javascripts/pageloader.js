@@ -84,4 +84,17 @@ function expandItem(tagId, sender, type) {
   }
 }
 
+function openURL (url) {
+  window.open(url,"_self")
+}
+
+function selectMenu(item) {
+  var menuNav =  document.getElementById('menu');
+  var menuList = menuNav.childNodes[0].childNodes;
+  for (var index = 0; index < menuList.length; index++ ) {
+    var menuItem = menuList[index];
+    menuItem.setAttribute("class", " ")
+  }
+  item.setAttribute("class", "selected")
+}
 window.onload = function () { fixLinks(null) };

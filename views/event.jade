@@ -9,7 +9,7 @@ block content
       img(class="banner", src=event.get("banner")._url)
     div(class="centerright")
         p #{event.get("price")} LPS   
-          button(class="default") COMPRAR TICKETS    
+          button(class="default", onclick="openURL('https://www.eventbrite.com/e/game-on-talks-tickets-26415935775')") COMPRAR TICKETS    
     p #{event.get("caption")}
     
   section(class="card")
