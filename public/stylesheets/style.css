@@ -57,7 +57,7 @@ header  li a {
 }
 
 header li a:hover {
-  color: #E74C3C;
+  color: #EA217D;
   transition: 0.5s ease-in-out;
 
 }
@@ -105,7 +105,7 @@ button {
 }
 
 button.default {
-  background: #2980B9;
+  background: #24BDE0;
   color: white;
   border-radius: 5px;
   padding-left: 20px;
@@ -323,7 +323,7 @@ table tr:nth-child(even) {
   display: inline-block;
   position: absolute;
   top: 0;
-  background-color: #E74C3C;
+  background-color: #EA217D;
   border-radius: 100%;
 
   -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
@@ -366,12 +366,17 @@ table tr:nth-child(even) {
   font-size: 14px;
 }
 
-.blue, .blue:hover {
-  color: #2777B4;
+.blue {
+  color: #24BDE0;
+}
+
+
+.blue:hover {
+  color: #24BDE0;
 }
 
 .selected {
-  color: #E74C3C;
+  color: #EA217D;
 }
 
 .centeredImage {
@@ -382,7 +387,7 @@ table tr:nth-child(even) {
 h1 {
   font-size: 28px;
   font-weight: normal;
-  color: #E74C3C;
+  color: #EA217D;
   text-align: center;
 }
 
@@ -402,7 +407,7 @@ a {
 }
 
 a:hover {
-  color: #E74C3C;
+  color: #EA217D;
 }
 a:visited {
   color: inherit;
