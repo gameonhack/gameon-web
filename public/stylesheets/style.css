@@ -165,6 +165,21 @@ table tr:nth-child(even) {
   padding: 20px;
 }
 
+main > .nocardrender {
+  margin-top: -90px;
+  margin-bottom: -40px;
+  padding-top:60px;
+  padding-bottom: 30px;
+  background-color: white;
+}
+
+.nocardrender .card {
+  border: none;
+}
+
+main > .nocardrender .card h1 {
+  color: #EA217D;
+}
 .transparent {
   background-color: rgba(0, 0, 0, 0.0);
   border: rgba(0, 0, 0, 0.0) 1px solid;
@@ -228,7 +243,9 @@ table tr:nth-child(even) {
   padding: 0px;
 }
 
-
+.center {
+  text-align: center;
+}
 .left{
   text-align: left;
 }
@@ -417,4 +434,23 @@ a:hover {
 }
 a:visited {
   color: inherit;
+}
+
+.mainImage  {
+  padding-top: 30px;
+}
+
+.mainImage img {
+  transform: translateY(0px);
+  transition: all 0.1s ease-in-out;
+}
+
+.mainImage img:hover {
+  transform: translateY(-10px);
+}
+
+.mainImage h1 {
+  color: #444444 !important;
+  text-align: center;
+  font-size: 28px;
 }
