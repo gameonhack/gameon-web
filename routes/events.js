@@ -16,7 +16,7 @@ gohrouter.router = express.Router();
 /* GET home page. */
 gohrouter.get('/', function(req, res, next) {
   dataManager.findEventsOrderBy({}, true, "date", function (results) {
-    res.gohrender('events', { title: 'Events', events :  results });
+    res.gohrender('events', { title: 'Eventos', events :  results });
   } )
 });
 
@@ -31,7 +31,7 @@ gohrouter.get('/:id', function(req, res, next) {
         return  nd;
       });
       console.log(groupedByMonth);
-      res.gohrender('event', { title: 'Events', event : event, schedules : groupedByMonth });
+      res.gohrender('event', { title: 'Eventos', event : event, schedules : groupedByMonth });
     })
   })
 });
@@ -40,7 +40,7 @@ gohrouter.get('/:id/schedule/:scheduleid/', function(req, res, next) {
   dataManager.findSchedules({"objectId" : req.params.scheduleid}, function (results) {
     var schedule = results[0]
     dataManager.findSpeakers({"schedule" : schedule}, function (results) {
-      res.gohrender('schedule', { title: 'Schedule', schedule : schedule, speakers : results });
+      res.gohrender('schedule', { title: 'Horario', schedule : schedule, speakers : results });
     })
   })
 });

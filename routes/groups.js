@@ -17,7 +17,7 @@ gohrouter.router = express.Router();
 /* GET home page. */
 gohrouter.get('/', function(req, res, next) {
   dataManager.getGroups(function (results) {
-    res.gohrender('groups', { title: 'Groups', groups :  results });
+    res.gohrender('groups', { title: 'Grupos', groups :  results });
   } )
 });
 
@@ -25,7 +25,7 @@ gohrouter.get('/:id', function(req, res, next) {
   dataManager.findGroups({"objectId" : req.params.id}, function (results) {
     var group = results[0];
     dataManager.findGames({"group" : group}, function (results) {
-      res.gohrender('group', { title: 'Group', group :  group, games : results });
+      res.gohrender('group', { title: 'Grupo', group :  group, games : results });
     })
   })
 });
