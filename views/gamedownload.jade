@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div(class= shouldLoadLayout == true ? 'card' : '')
+    if shouldLoadLayout == true
+      h1= game.get('name')
+
+    div(class= shouldLoadLayout == true ? "" : "col-10" )
+      p Downloads
+      each gamedownload in gamedownloads
+        a(href=gamedownload.get("url"))
+          img(src=gamedownload.get("console").get("icon")._url height="50")
