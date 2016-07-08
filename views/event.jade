@@ -8,14 +8,15 @@ block content
     div(class="crop")
       img(class="banner", src=event.get("banner")._url)
     div(class="centerright")
-        p #{event.get("price")} LPS   
-          button(class="default", onclick="openURL('https://www.eventbrite.com/e/game-on-talks-tickets-26415935775')") COMPRAR TICKETS    
+      -var price=event.get("price");
+      if price >0
+        p #{event.get("price")} LPS
+          button(class="default", onclick="openURL( '#{event.get('eventbrite')}')") COMPRAR TICKETS
     p #{event.get("caption")}
     
   section(class="card")
     h1 Horario
-    
-    if schedules
+    if schedules > 0
 
       each value, date in schedules
         
@@ -43,6 +44,6 @@ block content
                       div(class="dot1")
                       div(class="dot2")
     else 
-      p No events :(
+      p Proximo de ser anunciado
         
       
