@@ -13,9 +13,9 @@ block content
           p #{event.get("caption")}
         div(class = "col-2 centerhorizontal")
           if event.get("icon")
-            a(href='/events/' + event.id)
+            a(href='/events/#{event.get("slug")}')
               img(src=event.get("icon")._url width="100" height="auto")
-      a(class = 'blue' href='/events/' + event.id) Más información
+      a(class = 'blue' href='/events/#{event.get("slug")}' ) Más información
   
   if events.length == 0 
     section(class="card")

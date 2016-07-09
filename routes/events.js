@@ -21,8 +21,8 @@ gohrouter.get('/', function(req, res, next) {
 });
 
 
-gohrouter.get('/:id', function(req, res, next) {
-  dataManager.findEvents({"objectId" : req.params.id}, function (results) {
+gohrouter.get('/:slug', function(req, res, next) {
+  dataManager.findEvents({"slug" : req.params.slug}, function (results) {
     var event = results[0];
     dataManager.findSchedulesOrderBy({"event" : event}, true, "date",  function (schedulesResults) {
       var groupedByMonth = _.groupBy(schedulesResults, function(item) {
@@ -30,7 +30,6 @@ gohrouter.get('/:id', function(req, res, next) {
         var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
         return  nd;
       });
-      console.log(groupedByMonth);
       res.gohrender('event', { title: 'Eventos', event : event, schedules : groupedByMonth });
     })
   })
