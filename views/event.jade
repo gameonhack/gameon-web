@@ -12,11 +12,14 @@ block content
       if price >0
         p #{event.get("price")} LPS
           button(class="default", onclick="openURL( '#{event.get('eventbrite')}')") COMPRAR TICKETS
+      else
+        div(class="col-2 col-m-1")
+          h1(align='center') ¡Entrada Gratis!
     p #{event.get("description")}
     
   section(class="card")
     h1 Horario
-    if schedules
+    if schedules != null
 
       each value, date in schedules
         
@@ -44,6 +47,6 @@ block content
                       div(class="dot1")
                       div(class="dot2")
     else 
-      p Proximo de ser anunciado
+      p Proximo de ser anunciado...
         
       

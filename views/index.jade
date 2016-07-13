@@ -4,18 +4,20 @@ block content
   div(class="nocardrender")
     section(class="card")
       article
-        a(href="/events")
-          section(class="card")
+        
+        section(class="card")
+          a(href="/events/gotalks")
             div(class="col-3 mainImage")
               div(class="square")
                 img(class="cover", src="/images/events/gotalks.svg")
-              h1 GO Talks
-                
+              h1 GO Talks      
+          a(href="/events/gohackathon")
             div(class="col-3 col-m-1 mainImage")
-              div(class="square")
-                img(class="cover", src="/images/events/gohackathon.svg") 
-              h1 GO Hackathon   
-
+                div(class="square")
+                  img(class="cover", src="/images/events/gohackathon.svg") 
+                h1 GO Hackathon   
+            
+          a(href="/events/gobattle")
             div(class="col-3 mainImage")
               div(class="square ")
                 img(class="cover", src="/images/events/gobattle.svg")
@@ -34,7 +36,7 @@ block content
         p Las entradas se estarán vendiendo por eventbrite.com. Para comprarlas visita nuestra página de eventos y presiona el botón de comprar tickets.
         
         h1 ¿Si no soy estudiante de Unitec, aún puedo participar?
-        p ¡Si! Game on es evento abierto a todo público. No importa si eres estudiante profesional o simplemente amante de los videojuegos.
+        p ¡Si! Game on es evento abierto a todo público. No importa si eres estudiante, profesional o simplemente amante de los videojuegos.
     section(class="card")
       h1 Patrocinadores
       div(class="col-3 mainImage")
@@ -46,24 +48,24 @@ block content
       div(class="col-1 col-m-2 mainImage")
         a(onclick="openURL('http://www.mediacitygames.com/')")
           img(class="cover" , src="/images/sponsors/mediacity.svg")
+      div(class="col-1 col-m-2 mainImage")
+        a(onclick="openURL('http://ensohn.com/')")
+          img(class="cover" , src="/images/sponsors/enso_media.svg")
+      div(class="col-1 col-m-2 mainImage")
+        a(onclick="openURL('http://unitec.edu/')")
+          img(class="cover" , src="/images/sponsors/unitec.svg" )
+      div(class="col-1 col-m-2 mainImage")
+        a(onclick="openURL('http://www.facebook.com/ascitgu')")
+          img(class="cover" , src="/images/sponsors/sistemas.svg" )
       
     section(class="card")
-      h1 Contribuciones 
-      p(class="small") Ayúdanos a crear #{title}
-      
-      h2 Desarrollador
-      p Si quiere participar en el desarrollo del Game On, únete! Échale un vistazo a nuestro repositorio en Github: 
-        a(onclick="openURL('https://github.com/gameonhack')", class="blue") https://github.com/gameonhack
-        
-      p Por favor revisa nuestra 
-        a(href="/design", class="blue") guía de diseño 
-      
-      p Buscamos desarrolladores en NodeJS 
+      h1 Contacto 
+      p Si tienes alguna duda con el evento o simplemente quieres formar parte, escríbenos a: 
         a(onclick="openURL('mailto:info@gameonhack.com')" , class="blue") info@gameonhack.com
+      div(class="col-1 col-m-9 mainImage")
+        a(onclick="openURL('https://www.facebook.com/gameonhack')")
+          img(class="centervertical", src="/images/facebook.svg" width ='30px')
       
-      h2 Staff
-      p Para ser parte del Staff escríbenos a 
-        a(onclick="openURL('mailto:info@gameonhack.com')" , class="blue") info@gameonhack.com
     
     
           

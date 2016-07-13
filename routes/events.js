@@ -25,12 +25,17 @@ gohrouter.get('/:slug', function(req, res, next) {
   dataManager.findEvents({"slug" : req.params.slug}, function (results) {
     var event = results[0];
     dataManager.findSchedulesOrderBy({"event" : event}, true, "date",  function (schedulesResults) {
-      var groupedByMonth = _.groupBy(schedulesResults, function(item) {
+        var groupedByMonth = _.groupBy(schedulesResults, function(item) {
         var d = item.get("date")
         var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
         return  nd;
       });
-      res.gohrender('event', { title: 'Eventos', event : event, schedules : groupedByMonth });
+        console.log(schedulesResults.length);
+        if(schedulesResults.length>0){
+          res.gohrender('event', { title: 'Eventos', event : event, schedules : groupedByMonth });
+        }else{
+          res.gohrender('event', { title: 'Eventos', event : event, schedules : null });
+        }
     })
   })
 });
