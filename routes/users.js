@@ -9,11 +9,18 @@
 
 
 var express = require('express');
-var router = express.Router();
+var dataManager = require('datamanager');
+var gohrouter = require('gohrouter');
+gohrouter.router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+gohrouter.get('/', function(req, res, next) {
+  console.log(dataManager.user());
+  if (req.session.user == null) {
+    res.redirect("/login?shouldloadlayout=false")
+  } else {
+    res.send(req.session.user);
+  }
 });
 
-module.exports = router;
+module.exports = gohrouter.router;

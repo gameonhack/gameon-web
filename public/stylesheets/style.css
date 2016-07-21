@@ -127,6 +127,22 @@ button:hover {
   cursor: pointer;
 }
 
+label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 4px;
+  color: #5F5F5F;
+}
+
+input {
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  border: #CECECE solid 1px;
+  width: 100%;
+  max-width: 300px;
+}
+
 ul, ol {
   list-style: none;
   padding: 0px;
@@ -252,6 +268,12 @@ main > .nocardrender .card h1 {
 
 .right{
   text-align: right;
+}
+
+.floatRight {
+  float: right;
+  margin-right: 0px;
+  padding-right: 0px;
 }
 .centerright{
    text-align: right;

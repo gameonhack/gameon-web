@@ -18,7 +18,21 @@
 var Parse = require('parse/node');
 
 module.exports = {
-
+  user : function () {
+    return Parse.User.current();
+  },
+  logInUser : function(username, password, callback) {
+    Parse.User.logIn(username, password, {
+      success: function(user) {
+        // Do stuff after successful login.
+        callback(user, null);
+      },
+      error: function(user, error) {
+        // The login failed. Check error to see why.
+        callback(user, error);
+      }
+    });
+  } ,
   /**
    * anonymous function - description
    *

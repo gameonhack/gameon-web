@@ -23,6 +23,9 @@ module.exports = {
 
       res.gohrender = function (page, object) {
         object.shouldLoadLayout = module.exports.shouldLoadLayout(req)
+        if (req.session.user) {
+          object.user = req.session.user;
+        }
         res.render(page, object);
       }
       callback(req, res, next)
