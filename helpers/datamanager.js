@@ -18,8 +18,24 @@
 var Parse = require('parse/node');
 
 module.exports = {
-  user : function () {
-    return Parse.User.current();
+  Parse : function () {
+    return Parse;
+  },
+  user : function (req, callback) {
+
+    if (req.session.user) {
+      Parse.User.enableUnsafeCurrentUser()
+      Parse.User.become(req.session.user.sessionToken).then(function (user) {
+        // The current user is now set to user.
+        console.log(user);
+        callback(user)
+      }, function (error) {
+        // The token could not be validated.
+        console.log("not updated");
+        //return null
+      });
+    }
+
   },
   logInUser : function(username, password, callback) {
     Parse.User.logIn(username, password, {

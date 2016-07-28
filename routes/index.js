@@ -18,13 +18,8 @@ gohrouter.router = express.Router();
 gohrouter.router.post('/login', function(req, res) {
   dataManager.logInUser(req.body.user, req.body.pass, function(user, error) {
     if (error == null) {
-
-      req.session.user = user;
-
+      req.session.user = user
       res.redirect("/")
-
-      //res.send('welcome!')
-
 
     } else {
       res.send('Not welcome!')
@@ -45,5 +40,26 @@ gohrouter.get('/design',function(req, res, next) {
 gohrouter.get('/login',function(req, res, next) {
   res.gohrender('login', { title: 'Game On' })
 });
+
+gohrouter.get('/logout',function(req, res, next) {
+
+  dataManager.Parse().User.enableUnsafeCurrentUser()
+  dataManager.Parse().User.become(req.session.user.sessionToken).then(function (user) {
+    // The current user is now set to user.
+    dataManager.Parse().User.logOut().then(() => {
+      req.session.user = null
+      res.redirect("/?shouldloadlayout=false")
+    });
+
+  }, function (error) {
+    // The token could not be validated.
+    console.log(error);
+    req.session.user = null
+    res.redirect("/?shouldloadlayout=false")
+
+  });
+
+});
+
 
 module.exports = gohrouter.router;

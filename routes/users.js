@@ -15,11 +15,15 @@ gohrouter.router = express.Router();
 
 /* GET users listing. */
 gohrouter.get('/', function(req, res, next) {
-  console.log(dataManager.user());
   if (req.session.user == null) {
-    res.redirect("/login?shouldloadlayout=false")
+    res.gohrender('login', { title: 'Game On' })
   } else {
-    res.send(req.session.user);
+
+    dataManager.user(req, function(user) {
+      req.session.user = user
+      res.gohrender('profile', { title: 'Game On', user : user });
+    })
+
   }
 });
 
