@@ -13,10 +13,14 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-session": "^1.14.0",
+    "fb": "^1.1.1",
+    "fs": "0.0.2",
     "jade": "~1.11.0",
     "lodash": "^4.13.1",
     "morgan": "~1.6.1",
     "parse": "1.8.*",
-    "serve-favicon": "~2.3.0"
+    "request": "^2.74.0",
+    "serve-favicon": "~2.3.0",
+    "step": "0.0.6"
   }
 }

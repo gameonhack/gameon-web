@@ -1,25 +1,34 @@
 /**
 * @Author: Eduardo Irías <eduardo22i>
-<<<<<<< HEAD
-* @Date:   2016-06-01T14:54:46-06:00
-* @Project: GOHackathon
-* @Last modified by:   eduardoirias
-* @Last modified time: 2016-06-07T15:53:33-06:00
-=======
 * @Date:   2016-05-26T02:04:04-06:00
 * @Project: GOHackathon
 * @Last modified by:   eduardo22i
 * @Last modified time: 2016-05-31T18:33:40-06:00
->>>>>>> master
 */
 
 
 
 var Parse = require('parse/node');
+var FB = require('fb');
+
+FB.options({
+    appId:          '268551873519887',
+    appSecret:      '5b65718bc804ab4c346fd5a7d0295d73',
+    redirectUri:    (process.env.ROOT_URL || 'http://localhost:3000/') + 'login/callback'
+});
 
 module.exports = {
+  FB : function () {
+    return FB;
+  },
   Parse : function () {
     return Parse;
+  },
+  NewUser : function () {
+    return new Parse.User();
+  },
+  NewFile : function (fileName, fileData) {
+    return new Parse.File(fileName, fileData);
   },
   user : function (req, callback) {
 

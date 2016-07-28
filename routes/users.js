@@ -20,6 +20,7 @@ gohrouter.get('/', function(req, res, next) {
   } else {
 
     dataManager.user(req, function(user) {
+      console.log(user);
       req.session.user = user
       res.gohrender('profile', { title: 'Game On', user : user });
     })
