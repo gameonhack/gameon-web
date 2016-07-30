@@ -15,6 +15,7 @@ var dataManager = require('datamanager');
 var gohrouter = require('gohrouter');
 gohrouter.router = express.Router();
 
+var parseKeys = require('./../parsekeys');
 var Step = require('step')
 var request = require('request');
 var fs = require('fs')
@@ -50,35 +51,125 @@ gohrouter.get('/', function(req, res, next) {
 
 
 gohrouter.get('/tmp', function(req, res, next) {
-  var request = require('request');
-  request.post({
-    headers : {
-      "X-Parse-Application-Id" : "QCi6g6v8HEPYRlJ4rjt9eXbB26Rb870ZHuGDiCMc",
-       "content-type" : "application/json"
-     },
-    url : "http://gameonhack.com:8080/parse/users",
-    json : {
-        authData: {
-          facebook: {
-            id: "10154495793537369",
-            access_token: "EAAD0PxsGYQ8BAEp0GwEX8yvTZCF4FxTiLZAnY7AqCNDLUoVsmZBARYl6cZCQSZCggh7npZBz2BfsKAVRnpumRFll5ZAS3LqxgYqN8KwkbKxlJh7Q6p8tKogz9fgyLfnCgyAXVKrLXp1u59kFfVgV0x1VQJMBBZAKpncZD"
-          }
-        }
+
+
+  var code            = req.query.code;
+
+    if(req.query.error) {
+        // user might have disallowed the app
+        return res.send('login-error ' + req.query.error_description);
+    } else if(!code) {
+        return res.redirect('/');
     }
-  }, function(error, response, body){
-    console.log(body);
-  });
-    res.gohrender('index', { title: 'Game On' });
+
+    Step(
+        function exchangeCodeForAccessToken() {
+            dataManager.FB().napi('oauth/access_token', {
+                client_id:      dataManager.FB().FB.options('appId'),
+                client_secret:  dataManager.FB().FB.options('appSecret'),
+                redirect_uri:   dataManager.FB().FB.options('redirectUri'),
+                code:           code
+            }, this);
+        },
+        function extendAccessToken(err, result) {
+            if(err) throw(err);
+            dataManager.FB().napi('oauth/access_token', {
+                client_id:          dataManager.FB().FB.options('appId'),
+                client_secret:      dataManager.FB().FB.options('appSecret'),
+                grant_type:         'fb_exchange_token',
+                fb_exchange_token:  result.access_token
+            }, this);
+        },
+        function (err, result) {
+            if(err) return next(err);
+
+            req.session.access_token    = result.access_token;
+            req.session.expires         = result.expires || 0;
+
+            var parameters              = { access_token : req.session.access_token };
+
+            dataManager.FB().api('me/?fields=name,id,email', 'get', parameters, function (result) {
+
+              var request = require('request');
+              request.post({
+                headers : {
+                  "X-Parse-Application-Id" : parseKeys.appId,
+                   "content-type" : "application/json"
+                 },
+                url : "http://gameonhack.com:8080/parse/users",
+                json : {
+                    authData: {
+                      facebook: {
+                        id: result.id,
+                        access_token: req.session.access_token
+                      }
+                    }
+                }
+              }, function(error, response, body){
+
+                console.log(body.sessionToken);
+
+                dataManager.logInUserWithSession(body.sessionToken, function(user, error) {
+                  if (error == null) {
+                    req.session.user = user
+                    res.redirect("/")
+
+                  } else {
+                    res.send('Not welcome!')
+                  }
+                })
+
+                console.log(body);
+
+
+              });
+
+
+
+            });
+          }
+        );
+
 });
 
 gohrouter.get('/design',function(req, res, next) {
   res.gohrender('design', { title: 'Design Guideline' })
 });
 
-gohrouter.get('/signup',function(req, res, next) {
-  res.gohrender('signup', { title: 'Game On', facebooklogin : dataManager.FB().getLoginUrl({ scope: 'user_about_me,email,user_likes' }) });
-});
+function requestLogin(req, res, id, accessToken) {
+  var request = require('request');
+  request.post({
+    headers : {
+      "X-Parse-Application-Id" :  parseKeys.appId,
+      "content-type" : "application/json"
+    },
+    url : "http://gameonhack.com:8080/parse/users",
+    json : {
+      authData: {
+        facebook: {
+          id: id,
+          access_token: accessToken
+        }
+      }
+    }
+  }, function(error, response, body){
 
+    console.log(id);
+    console.log(body);
+
+    dataManager.logInUserWithSession(body.sessionToken, function(user, error) {
+
+      if (error == null) {
+        req.session.user = user
+        return res.redirect("/profile")
+
+      } else {
+        return res.send('Not welcome!')
+      }
+    })
+
+  });
+}
 
 gohrouter.get('/login/callback',function(req, res, next) {
   var code            = req.query.code;
@@ -118,66 +209,91 @@ gohrouter.get('/login/callback',function(req, res, next) {
 
             dataManager.FB().api('me/?fields=name,id,email', 'get', parameters, function (result) {
 
-              if(!result || result.error) {
-                return res.send(500, result || 'error');
-              }
 
-              download("https://graph.facebook.com/"+result.id+"/picture?width=600", 'google.png', function(){
-                var data = new Buffer(fs.readFileSync("google.png")).toString("base64")
-                var parseFile = dataManager.NewFile("image.jpg", { base64: data });
-                parseFile.save().then(function() {
-                  // The file has been saved to Parse.
+              var query = dataManager.NewUserQuery();
+              query.equalTo("facebookId", result.id);
+              query.find({
+                success: function(object) {
+                  // Do stuff
 
-                  var user = dataManager.NewUser();
-                  user.set("username", result.id);
-                  user.set("password", "mypass");
-                  user.set("email", result.email);
+                  console.log(object);
 
-                  var  authData = {
-                    "facebook": {
-                      "id": result.id,
-                      "access_token": req.session.access_token,
-                      "expiration_date": req.session.expires
-                    }
+                  var facebookId = result.id
+
+                  if (object.length == 0) {
+
+                    var imageFile = "img"+ facebookId + ".jpg"
+
+                    download("https://graph.facebook.com/"+facebookId+"/picture?width=600", imageFile, function(){
+                      var data = new Buffer(fs.readFileSync( imageFile )).toString("base64")
+                      var parseFile = dataManager.NewFile("image.jpg", { base64: data });
+                      parseFile.save().then(function() {
+                        // The file has been saved to Parse.
+
+                        var user = dataManager.NewUser();
+                        user.set("username", facebookId);
+                        user.set("password", "mypass");
+                        user.set("email", result.email);
+
+                        var  authData = {
+                          "facebook": {
+                            "id": facebookId,
+                            "access_token": req.session.access_token,
+                            "expiration_date": req.session.expires
+                          }
+                        }
+                        user.set("authData", authData);
+
+                        // other fields can be set just like with Parse.Object
+                        user.set("name", result.name);
+                        user.set("facebookId", facebookId);
+                        user.set("image", parseFile);
+
+                        user.signUp(null, {
+                          success: function(user) {
+                            // Hooray! Let them use the app now.
+                            fs.unlinkSync(imageFile)
+                            requestLogin(req, res, facebookId, req.session.access_token)
+
+                          },
+                          error: function(user, error) {
+                            console.log("NOT Hooray");
+                            // Show the error message somewhere and let the user try again.
+                            return res.send("Error: " + error.code + " " + error.message);
+                          }
+                        });
+
+
+                      }, function(error) {
+                        // The file either could not be read, or could not be saved to Parse.
+
+                        return res.send("Error: " + error.code + " " + error.message);
+
+                      });
+                    });
+
+                  } else {
+
+                    return requestLogin(req, res, facebookId, req.session.access_token)
+
                   }
-                  user.set("authData", authData);
 
-                  // other fields can be set just like with Parse.Object
-                  user.set("name", result.name);
-                  user.set("facebookId", result.id);
-                  user.set("image", parseFile);
-
-                  user.signUp(null, {
-                    success: function(user) {
-                      // Hooray! Let them use the app now.
-
-                      return res.redirect('/');
-
-                      //return res.redirect('/');
-                    },
-                    error: function(user, error) {
-                      // Show the error message somewhere and let the user try again.
-                      return res.send("Error: " + error.code + " " + error.message);
-                    }
-                  });
-
-
-                }, function(error) {
-                  // The file either could not be read, or could not be saved to Parse.
-                });
+                }
               });
 
+            });
 
 
             });
 
-          }
-    );
+});
 
+gohrouter.get('/signup',function(req, res, next) {
+  res.gohrender('signup', { title: 'Game On', facebooklogin : dataManager.FB().getLoginUrl({ scope: 'user_about_me,email,user_likes' }) });
 });
 
 gohrouter.get('/login',function(req, res, next) {
-  res.gohrender('login', { title: 'Game On' })
+  res.gohrender('login', { title: 'Game On', facebooklogin : dataManager.FB().getLoginUrl({ scope: 'user_about_me,email,user_likes' }) })
 });
 
 gohrouter.get('/logout',function(req, res, next) {

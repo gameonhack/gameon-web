@@ -30,6 +30,9 @@ module.exports = {
   NewFile : function (fileName, fileData) {
     return new Parse.File(fileName, fileData);
   },
+  NewUserQuery : function (fileName, fileData) {
+    return new Parse.Query(Parse.User);
+  },
   user : function (req, callback) {
 
     if (req.session.user) {
@@ -58,6 +61,18 @@ module.exports = {
       }
     });
   } ,
+
+  logInUserWithSession : function(session, callback) {
+    Parse.User.enableUnsafeCurrentUser()
+    Parse.User.become(session).then(function (user) {
+      // The current user is now set to user.
+      callback(user, null);
+    }, function (error) {
+      // The token could not be validated.
+      callback(null, error);
+    });
+  } ,
+
   /**
    * anonymous function - description
    *

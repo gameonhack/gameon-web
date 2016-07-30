@@ -16,7 +16,7 @@ gohrouter.router = express.Router();
 /* GET users listing. */
 gohrouter.get('/', function(req, res, next) {
   if (req.session.user == null) {
-    res.gohrender('login', { title: 'Game On' })
+    res.gohrender('login', { title: 'Game On', facebooklogin : dataManager.FB().getLoginUrl({ scope: 'user_about_me,email,user_likes' }) })
   } else {
 
     dataManager.user(req, function(user) {
