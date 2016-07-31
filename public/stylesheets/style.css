@@ -128,12 +128,26 @@ button.default {
   margin-left: 5px;
 }
 
+button.facebook {
+  background: #3b5998;
+  color: white;
+  border: none;
+}
+
+button.facebook i {
+  margin-right: 10px;
+}
+
 button.large {
   font-size: 24px;
 }
 
 button:hover {
   cursor: pointer;
+}
+
+button span {
+  margin-left: 4px;
 }
 
 label {
@@ -166,6 +180,12 @@ table .main {
 }
 table tr:nth-child(even) {
   border-bottom: 1px #cdcdcd solid;
+}
+
+.fullWidth {
+  width: 100%;
+  max-width: 100%;
+  display: block;
 }
 
 .bottomBorder {

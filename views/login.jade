@@ -5,19 +5,33 @@ block content
   h1 Login
   
   section(class="card")
-    a(onclick="openURL('#{facebooklogin}')")
-      img(src="https://www.facebook.com/images/fb_icon_325x325.png")
+    
+    
+    div(class="col-5")
+      h1 Conectar con Facebook
+    div(class="col-5")
+      h1 A la Vieja Manera (Para Hipsters)
       
-  section(class="card")
-    h1 Login with your username and password
-    div(class="col-2")
-    div(class="col-8")
+    div(class="col-4")
+      img(src="/images/gohack_icon.svg" class="col-m-6")
+      a(onclick="openURL('#{facebooklogin}')")
+        button(type="button", class="border facebook fullWidth m-t-1")
+          i(class="fa fa-facebook" aria-hidden="true")
+          span Conectar Con Facebook 
+    
+    
+    div(class="col-4 col-m-2")
+      
       form(method="post" action="/login")
         div
           label(for="username") Username
-          input(type="text", placeholder="Username", id="username", name="user")
+          input(type="text", class="fullWidth" placeholder="Username", id="username", name="user")
         div
           label(for="username") Password
-          input(type="password", placeholder="Password", name="pass") 
-        button(type="submit", class="default floatRight") Login 
+          input(type="password", class="fullWidth", placeholder="Password", name="pass") 
+        
+        button(type="submit", class="default m-t-1 floatRight") Login 
+        
+    hr(class="m-t-4")
       
+    p(class="small") Al acceder a Game On tus datos se guardarán en nuestro servicio. Estos datos pueden ser correo electrónico, nombre completo, información personal, foto de perfil, usuario de Facebook. Game On, no compartirá esta información con otros aplicaciones o sitios. Si estas de acuerdo con nuestros términos y condiciones puedes continuar.
