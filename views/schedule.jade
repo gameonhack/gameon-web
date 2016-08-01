@@ -15,11 +15,12 @@ block content
           each speaker in speakers
             li
               if speaker.get("user")
-                div(class="col-1")
-                  img(class="centervertical clip-circle-3", width="100%", src=speaker.get("user").get("image")._url)
-                div(class="col-8 col-m-1")
-                  p= speaker.get("user").get("name")
-                  if speaker.get("user").get("group")
-                    p(class="small")= speaker.get("user").get("group").get("name")
+                a(href="/#{speaker.get('user').get('username')}")
+                  div(class="col-1")
+                    img(class="centervertical clip-circle-3", width="100%", src=speaker.get("user").get("image")._url)
+                  div(class="col-8 col-m-1")
+                    p= speaker.get("user").get("name")
+                    if speaker.get("user").get("group")
+                      p(class="small")= speaker.get("user").get("group").get("name")
       else 
         p Se anunciará pronto.

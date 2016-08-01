@@ -39,7 +39,6 @@ module.exports = {
       Parse.User.enableUnsafeCurrentUser()
       Parse.User.become(req.session.user.sessionToken).then(function (user) {
         // The current user is now set to user.
-        console.log(user);
         callback(user)
       }, function (error) {
         // The token could not be validated.

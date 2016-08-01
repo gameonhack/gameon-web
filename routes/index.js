@@ -18,14 +18,13 @@ gohrouter.router = express.Router();
 var parseKeys = require('./../parsekeys');
 var Step = require('step')
 var request = require('request');
-var fs = require('fs')
 
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
     console.log('content-type:', res.headers['content-type']);
     console.log('content-length:', res.headers['content-length']);
 
-    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+    request(uri).pipe(gohrouter.fs.createWriteStream(filename)).on('close', callback);
   });
 };
 
@@ -137,7 +136,7 @@ gohrouter.get('/login/callback',function(req, res, next) {
                     var imageFile = "img"+ facebookId + ".jpg"
 
                     download("https://graph.facebook.com/"+facebookId+"/picture?width=600", imageFile, function(){
-                      var data = new Buffer(fs.readFileSync( imageFile )).toString("base64")
+                      var data = new Buffer(gohrouter.fs.readFileSync( imageFile )).toString("base64")
                       var parseFile = dataManager.NewFile("image.jpg", { base64: data });
                       parseFile.save().then(function() {
                         // The file has been saved to Parse.
@@ -164,7 +163,7 @@ gohrouter.get('/login/callback',function(req, res, next) {
                         user.signUp(null, {
                           success: function(user) {
                             // Hooray! Let them use the app now.
-                            fs.unlinkSync(imageFile)
+                            gohrouter.fs.unlinkSync(imageFile)
                             requestLogin(req, res, facebookId, req.session.access_token)
 
                           },

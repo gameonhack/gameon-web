@@ -84,7 +84,7 @@ gohrouter.get('/', function(req, res, next) {
 
     dataManager.user(req, function(user) {
       req.session.user = user
-      res.gohrender('profile/profile', { title: 'Game On', user : user });
+      res.gohrender('profile/profile', { title: 'Game On', userView : user, isCurrent : true });
     })
 
   }
@@ -97,10 +97,59 @@ gohrouter.get('/edit', function(req, res, next) {
 
     dataManager.user(req, function(user) {
       req.session.user = user
-      res.gohrender('profile/edit', { title: 'Game On', user : user });
+      res.gohrender('profile/edit', { title: 'Game On', userView : user });
     })
 
   }
 });
 
+gohrouter.get('/:id', function(req, res, next) {
+
+  var query = dataManager.NewUserQuery();
+  query.equalTo("username", req.params.id);
+  query.find({
+    success: function(users) {
+
+      if (users.length == 0) {
+        return res.send("user not found")
+      }
+      var user = users[0]
+      var isCurrent = req.session.user.objectId == user.id
+      res.gohrender('profile/profile', { title: 'Game On', userView : user, isCurrent : isCurrent });
+
+    }
+  })
+
+});
+
 module.exports = gohrouter.router;
+
+
+module.exports.findUsers = function (req, res, notFoundCallback) {
+  res.gohrender = function (page, object) {
+    var query = require('url').parse(req.url,true).query;
+    object.shouldLoadLayout = query.shouldloadlayout == undefined ? true : query.shouldloadlayout;
+
+    if (req.session.user) {
+      object.user = req.session.user;
+    }
+    res.render(page, object);
+  }
+
+  var user = req._parsedOriginalUrl.pathname.substring(1)
+  console.log(user);
+  var query = dataManager.NewUserQuery();
+  query.equalTo("username", user);
+  query.find({
+    success: function(users) {
+
+      if (users.length == 0) {
+        return notFoundCallback()
+      }
+      var user = users[0]
+      var isCurrent = req.session.user.objectId == user.id
+      res.gohrender('profile/profile', { title: 'Game On', userView : user, isCurrent : isCurrent });
+
+    }
+  })
+}
