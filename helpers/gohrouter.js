@@ -11,8 +11,14 @@
 var express = require('express');
 module.exports.router = {}
 
+var multer  = require('multer')
+var fs = require('fs')
+
 
 module.exports = {
+  fs : fs,
+  upload : multer({ dest: 'public/uploads/' }),
+
   shouldLoadLayout : function (req) {
     var query = require('url').parse(req.url,true).query;
     return query.shouldloadlayout == undefined ? true : query.shouldloadlayout;

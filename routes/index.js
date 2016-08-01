@@ -44,92 +44,10 @@ gohrouter.router.post('/login', function(req, res) {
 
 });
 
+
 /* GET home page. */
 gohrouter.get('/', function(req, res, next) {
   res.gohrender('index', { title: 'Game On' });
-});
-
-
-gohrouter.get('/tmp', function(req, res, next) {
-
-
-  var code            = req.query.code;
-
-    if(req.query.error) {
-        // user might have disallowed the app
-        return res.send('login-error ' + req.query.error_description);
-    } else if(!code) {
-        return res.redirect('/');
-    }
-
-    Step(
-        function exchangeCodeForAccessToken() {
-            dataManager.FB().napi('oauth/access_token', {
-                client_id:      dataManager.FB().FB.options('appId'),
-                client_secret:  dataManager.FB().FB.options('appSecret'),
-                redirect_uri:   dataManager.FB().FB.options('redirectUri'),
-                code:           code
-            }, this);
-        },
-        function extendAccessToken(err, result) {
-            if(err) throw(err);
-            dataManager.FB().napi('oauth/access_token', {
-                client_id:          dataManager.FB().FB.options('appId'),
-                client_secret:      dataManager.FB().FB.options('appSecret'),
-                grant_type:         'fb_exchange_token',
-                fb_exchange_token:  result.access_token
-            }, this);
-        },
-        function (err, result) {
-            if(err) return next(err);
-
-            req.session.access_token    = result.access_token;
-            req.session.expires         = result.expires || 0;
-
-            var parameters              = { access_token : req.session.access_token };
-
-            dataManager.FB().api('me/?fields=name,id,email', 'get', parameters, function (result) {
-
-              var request = require('request');
-              request.post({
-                headers : {
-                  "X-Parse-Application-Id" : parseKeys.appId,
-                   "content-type" : "application/json"
-                 },
-                url : "http://gameonhack.com:8080/parse/users",
-                json : {
-                    authData: {
-                      facebook: {
-                        id: result.id,
-                        access_token: req.session.access_token
-                      }
-                    }
-                }
-              }, function(error, response, body){
-
-                console.log(body.sessionToken);
-
-                dataManager.logInUserWithSession(body.sessionToken, function(user, error) {
-                  if (error == null) {
-                    req.session.user = user
-                    res.redirect("/")
-
-                  } else {
-                    res.send('Not welcome!')
-                  }
-                })
-
-                console.log(body);
-
-
-              });
-
-
-
-            });
-          }
-        );
-
 });
 
 gohrouter.get('/design',function(req, res, next) {
@@ -153,9 +71,6 @@ function requestLogin(req, res, id, accessToken) {
       }
     }
   }, function(error, response, body){
-
-    console.log(id);
-    console.log(body);
 
     dataManager.logInUserWithSession(body.sessionToken, function(user, error) {
 
@@ -215,9 +130,6 @@ gohrouter.get('/login/callback',function(req, res, next) {
               query.find({
                 success: function(object) {
                   // Do stuff
-
-                  console.log(object);
-
                   var facebookId = result.id
 
                   if (object.length == 0) {

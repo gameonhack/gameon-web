@@ -1,9 +1,9 @@
-extends layout
+extends ../layout
 
 block content
   
   section(class="card center")
-    img(class="cover" src="http://gameonhack.com:1337/parse/files/QCi6g6v8HEPYRlJ4rjt9eXbB26Rb870ZHuGDiCMc/0997356338bcc55c86baf4cfa0ec984b_Banner.jpg")
+    img(height="220px" class="cover" src="/images/rectangle.png")
     
     div(class="crop-square whiteBorder n-t-7 n-b-7 circle-border")
       img(class="" src=user.get("image")._url )
@@ -19,3 +19,9 @@ block content
       button(type="button", class="border")
         i(class="fa fa-sign-out" aria-hidden="true")
         span Logout 
+    
+    a(href="/profile/edit" class="floatRight")
+      button(type="button", class="border")
+        i(class="fa fa-ellipsis-h" aria-hidden="true")
+        span Edit
+        

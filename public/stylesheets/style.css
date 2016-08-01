@@ -134,6 +134,7 @@ button.facebook {
   border: none;
 }
 
+
 button.facebook i {
   margin-right: 10px;
 }
@@ -147,7 +148,12 @@ button:hover {
 }
 
 button span {
-  margin-left: 4px;
+  margin-left: 10px;
+}
+
+button i {
+  margin: 0px;
+  padding: 0;
 }
 
 label {
