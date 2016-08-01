@@ -1,23 +1,76 @@
 /**
 * @Author: Eduardo Irías <eduardo22i>
-<<<<<<< HEAD
-* @Date:   2016-06-01T14:54:46-06:00
-* @Project: GOHackathon
-* @Last modified by:   eduardoirias
-* @Last modified time: 2016-06-07T15:53:33-06:00
-=======
 * @Date:   2016-05-26T02:04:04-06:00
 * @Project: GOHackathon
 * @Last modified by:   eduardo22i
 * @Last modified time: 2016-05-31T18:33:40-06:00
->>>>>>> master
 */
 
 
 
 var Parse = require('parse/node');
+var FB = require('fb');
+
+FB.options({
+    appId:          '268551873519887',
+    appSecret:      '5b65718bc804ab4c346fd5a7d0295d73',
+    redirectUri:    (process.env.ROOT_URL || 'http://localhost:3000/') + 'login/callback'
+});
 
 module.exports = {
+  FB : function () {
+    return FB;
+  },
+  Parse : function () {
+    return Parse;
+  },
+  NewUser : function () {
+    return new Parse.User();
+  },
+  NewFile : function (fileName, fileData) {
+    return new Parse.File(fileName, fileData);
+  },
+  NewUserQuery : function (fileName, fileData) {
+    return new Parse.Query(Parse.User);
+  },
+  user : function (req, callback) {
+
+    if (req.session.user) {
+      Parse.User.enableUnsafeCurrentUser()
+      Parse.User.become(req.session.user.sessionToken).then(function (user) {
+        // The current user is now set to user.
+        callback(user)
+      }, function (error) {
+        // The token could not be validated.
+        console.log("not updated");
+        //return null
+      });
+    }
+
+  },
+  logInUser : function(username, password, callback) {
+    Parse.User.logIn(username, password, {
+      success: function(user) {
+        // Do stuff after successful login.
+        callback(user, null);
+      },
+      error: function(user, error) {
+        // The login failed. Check error to see why.
+        callback(user, error);
+      }
+    });
+  } ,
+
+  logInUserWithSession : function(session, callback) {
+    Parse.User.enableUnsafeCurrentUser()
+    Parse.User.become(session).then(function (user) {
+      // The current user is now set to user.
+      callback(user, null);
+    }, function (error) {
+      // The token could not be validated.
+      callback(null, error);
+    });
+  } ,
 
   /**
    * anonymous function - description

@@ -11,8 +11,14 @@
 var express = require('express');
 module.exports.router = {}
 
+var multer  = require('multer')
+var fs = require('fs')
+
 
 module.exports = {
+  fs : fs,
+  upload : multer({ dest: 'public/uploads/' }),
+
   shouldLoadLayout : function (req) {
     var query = require('url').parse(req.url,true).query;
     return query.shouldloadlayout == undefined ? true : query.shouldloadlayout;
@@ -23,6 +29,9 @@ module.exports = {
 
       res.gohrender = function (page, object) {
         object.shouldLoadLayout = module.exports.shouldLoadLayout(req)
+        if (req.session.user) {
+          object.user = req.session.user;
+        }
         res.render(page, object);
       }
       callback(req, res, next)

@@ -16,6 +16,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('client-sessions');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -35,6 +36,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// Session
+app.use(session({
+  cookieName: 'session',
+  secret: 'keyboard cat',
+  duration: 31 * 24 * 60 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}))
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -45,15 +54,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/profile', users);
 app.use('/groups', groups);
 app.use('/events', events);
 app.use('/games', games);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+
+  users.findUsers (req, res, function() {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  })
 });
 
 // error handlers

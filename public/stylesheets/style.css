@@ -106,17 +106,37 @@ footer img{
 button {
   border: none;
   background: inherit;
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: #575757;
+  line-height: 24px;
+  min-width: 90px;
 }
 
+button.border {
+  border: 1px solid #d5d5d5;
+  border-radius: 6px;
+}
 button.default {
   background: #24BDE0;
   color: white;
-  border-radius: 5px;
+  border-radius: 6px;
   padding-left: 20px;
   padding-right: 20px;
   margin-left: 5px;
+}
+
+button.facebook {
+  background: #3b5998;
+  color: white;
+  border: none;
+}
+
+
+button.facebook i {
+  margin-right: 10px;
 }
 
 button.large {
@@ -125,6 +145,31 @@ button.large {
 
 button:hover {
   cursor: pointer;
+}
+
+button span {
+  margin-left: 10px;
+}
+
+button i {
+  margin: 0px;
+  padding: 0;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 4px;
+  color: #5F5F5F;
+}
+
+input {
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 6px;
+  border: #CECECE solid 1px;
+  width: 100%;
+  max-width: 300px;
 }
 
 ul, ol {
@@ -141,6 +186,12 @@ table .main {
 }
 table tr:nth-child(even) {
   border-bottom: 1px #cdcdcd solid;
+}
+
+.fullWidth {
+  width: 100%;
+  max-width: 100%;
+  display: block;
 }
 
 .bottomBorder {
@@ -161,7 +212,7 @@ table tr:nth-child(even) {
 .card {
   background-color: white;
   border: #E0E0E0 1px solid;
-  border-radius: 5px;
+  border-radius: 6px;
   padding: 20px;
 }
 
@@ -200,7 +251,7 @@ main > .nocardrender .card h1 {
 .cardgroup .group {
   background-color: white;
   border: #E0E0E0 1px solid;
-  border-radius: 5px;
+  border-radius: 6px;
   margin-left: 1%;
   margin-right: 1%;
   margin-bottom: 2%;
@@ -253,6 +304,12 @@ main > .nocardrender .card h1 {
 .right{
   text-align: right;
 }
+
+.floatRight {
+  float: right;
+  margin-right: 0px;
+  padding-right: 0px;
+}
 .centerright{
    text-align: right;
 }
@@ -286,6 +343,13 @@ main > .nocardrender .card h1 {
   overflow: hidden;
 }
 
+.whiteBorder {
+  border: 4px solid white;
+}
+
+.circle-border {
+  border-radius: 100px;
+}
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9 {
   display: inline-block;
   height: 100%;
@@ -318,6 +382,39 @@ main > .nocardrender .card h1 {
 .m-t-4 {  margin-top: 40px; }
 .m-t-5 {  margin-top: 50px; }
 
+.nm-t-1 {  margin-top: -10px; }
+.nm-t-2 {  margin-top: -20px; }
+.nm-t-3 {  margin-top: -30px; }
+.nm-t-4 {  margin-top: -40px; }
+.nm-t-5 {  margin-top: -50px; }
+.nm-t-7 {  margin-top: -70px; }
+.nm-t-10 {  margin-top: -100px; }
+
+.n-t-7 {  top: -70px; }
+.n-b-7 {  bottom: -70px; }
+
+.crop-square {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    background: #d5d5d5;
+}
+.crop-square img {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    margin: auto;
+    width: 100%;
+}
+
+.clip-10 {
+  clip-path: inset(0px 0px 100px 100px);
+}
+
 .clip-circle-3 {
   -webkit-clip-path: circle(30px at center);
   clip-path: circle(30px at center);
@@ -328,6 +425,10 @@ main > .nocardrender .card h1 {
   clip-path: circle(50px at center);
 }
 
+.clip-circle-7 {
+  -webkit-clip-path: circle(70px at center);
+  clip-path: circle(70px at center);
+}
 
 .spinner {
   margin: 300px auto;
@@ -411,6 +512,10 @@ h1 {
   font-size: 28px;
   font-weight: normal;
   color: #EA217D;
+  text-align: center;
+}
+
+h1.center {
   text-align: center;
 }
 

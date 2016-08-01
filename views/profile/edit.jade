@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+
+  section(class="card center")
+  
+    h1 Editar Perfil
+    
+    form(method="post" action="/profile/edit" enctype="multipart/form-data")
+        
+      div(class="crop-square whiteBorder circle-border")
+        img(class="" src=user.get("image")._url )
+
+      div
+        label(for="username") Foto
+        input(type="file" name="photo")
+      
+      div
+        label(for="username") Nombre
+        input(type="text", placeholder="Username", id="name", name="name" value="#{user.get('name')}")
+      
+      div
+        label(for="username") Username
+        input(type="text", placeholder="Username", id="user", name="user" value="#{user.get('username')}")
+      
+      button(type="submit", class="default m-t-1") Save 
+      
+  //    
+    section(class="card center")
+    
+      h1 Contraseña
+
+      form(method="post" action="/editpassword")
+
+        div
+          label(for="username") Password
+          input(type="password", placeholder="Password", name="pass") 
+          
+          button(type="submit", class="default m-t-1") Save 
+
+      
