@@ -53,7 +53,7 @@ gohrouter.get('/design',function(req, res, next) {
   res.gohrender('design', { title: 'Design Guideline' })
 });
 
-function requestLogin(req, res, id, accessToken) {
+function requestLogin(req, res, id, accessToken, nextUrl) {
   var request = require('request');
   request.post({
     headers : {
@@ -75,7 +75,7 @@ function requestLogin(req, res, id, accessToken) {
 
       if (error == null) {
         req.session.user = user
-        return res.redirect("/profile")
+        return res.redirect(nextUrl)
 
       } else {
         return res.send('Not welcome!')
@@ -164,7 +164,7 @@ gohrouter.get('/login/callback',function(req, res, next) {
                           success: function(user) {
                             // Hooray! Let them use the app now.
                             gohrouter.fs.unlinkSync(imageFile)
-                            requestLogin(req, res, facebookId, req.session.access_token)
+                            requestLogin(req, res, facebookId, req.session.access_token, "/profile/edit")
 
                           },
                           error: function(user, error) {
@@ -185,7 +185,7 @@ gohrouter.get('/login/callback',function(req, res, next) {
 
                   } else {
 
-                    return requestLogin(req, res, facebookId, req.session.access_token)
+                    return requestLogin(req, res, facebookId, req.session.access_token, "/profile")
 
                   }
 
