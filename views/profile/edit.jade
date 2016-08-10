@@ -9,11 +9,11 @@ block content
     form(method="post" action="/profile/edit" enctype="multipart/form-data")
         
       div(class="crop-square whiteBorder circle-border")
-        img(class="" src=user.get("image")._url )
+        img(class="" id="userprofileImg" src=user.get("image")._url )
 
       div
         label(for="username") Foto
-        input(type="file" name="photo")
+        input(type="file" name="photo" onchange="handleFileSelect(event)")
       
       div
         label(for="username") Nombre
