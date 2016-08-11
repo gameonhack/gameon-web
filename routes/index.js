@@ -163,6 +163,34 @@ gohrouter.get('/login/callback',function(req, res, next) {
                         user.signUp(null, {
                           success: function(user) {
                             // Hooray! Let them use the app now.
+                            var snames = result.name.split(" ");
+                            var fname = snames[0];
+                            var lname = snames[1];
+                            var request = require('request');
+                            if (fname == null) {
+                              fname = ""
+                            }
+                            if (lname == null) {
+                              lname = ""
+                            }
+                            request.post({
+                              headers : {
+                                "X-Parse-Application-Id" :  parseKeys.appId,
+                                "content-type" : "application/json"
+                              },
+                              url : "http://gameonhack.us13.list-manage.com/subscribe/post?u=a74d555a0c667c17b0b501bdf&amp;id=ef3289a502",
+                              form : {
+                                EMAIL: result.email,
+                                FNAME: fname,
+                                LNAME: lname,
+                                b_a74d555a0c667c17b0b501bdf_ef3289a502: "",
+                              }
+                            }, function(error, response, body){
+
+
+
+                            });
+
                             gohrouter.fs.unlinkSync(imageFile)
                             requestLogin(req, res, facebookId, req.session.access_token)
 
