@@ -10,7 +10,7 @@ block content
     div(class="centerright")
       -var price=event.get("price");
       if price >0
-        p #{event.get("price")} LPS
+        p 
           button(class="default", onclick="openURL( '#{event.get('eventbrite')}')") COMPRAR TICKETS
       else
         div(class="col-2 col-m-1")

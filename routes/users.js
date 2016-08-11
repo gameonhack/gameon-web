@@ -138,7 +138,6 @@ module.exports.findUsers = function (req, res, notFoundCallback) {
   }
 
   var user = req._parsedOriginalUrl.pathname.substring(1)
-  console.log(user);
   var query = dataManager.NewUserQuery();
   query.equalTo("username", user);
   query.find({
@@ -148,7 +147,12 @@ module.exports.findUsers = function (req, res, notFoundCallback) {
         return notFoundCallback()
       }
       var user = users[0]
-      var isCurrent = req.session.user.objectId == user.id
+
+      var isCurrent = false
+      if (req.session.user) {
+        isCurrent = req.session.user.objectId == user.id
+      }
+
       res.gohrender('profile/profile', { title: 'Game On', userView : user, isCurrent : isCurrent });
 
     }
