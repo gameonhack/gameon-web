@@ -21,9 +21,6 @@ var request = require('request');
 
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
-    console.log('content-type:', res.headers['content-type']);
-    console.log('content-length:', res.headers['content-length']);
-
     request(uri).pipe(gohrouter.fs.createWriteStream(filename)).on('close', callback);
   });
 };
@@ -168,7 +165,6 @@ gohrouter.get('/login/callback',function(req, res, next) {
 
                           },
                           error: function(user, error) {
-                            console.log("NOT Hooray");
                             // Show the error message somewhere and let the user try again.
                             return res.send("Error: " + error.code + " " + error.message);
                           }

@@ -172,6 +172,15 @@ input {
   max-width: 300px;
 }
 
+textarea {
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 6px;
+  border: #CECECE solid 1px;
+  width: 100%;
+  max-width: 300px;
+  resize: none;
+}
 ul, ol {
   list-style: none;
   padding: 0px;

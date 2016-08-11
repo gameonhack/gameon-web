@@ -98,6 +98,11 @@ function selectMenu(item) {
   item.setAttribute("class", "selected")
 }
 
+function textAreaAdjust(o) {
+    o.style.height = "1px";
+    o.style.height = (25+o.scrollHeight)+"px";
+}
+
 function handleFileSelect(evt) {
     console.log(evt);
     var files = evt.target.files; // FileList object
