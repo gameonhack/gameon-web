@@ -58,13 +58,18 @@ function loadPageSegment(page, tagId, reLoadPermitted) {
 }
 
 function fixLinks(incontext){
-    var context = incontext == null ?  document : incontext;
-    var links =  context.getElementsByTagName('a');
-    for(i = 0 ; i<links.length ; i++){
-      var curLink = links[i].pathname
-      links[i].href = "javascript:loadPage('"+curLink+"')"
-    }
+  var context = incontext == null ?  document : incontext;
+  var links =  context.getElementsByTagName('a');
+  for(i = 0 ; i<links.length ; i++){
+    var curLink = links[i].pathname
+    links[i].href = "javascript:loadPage('"+curLink+"')"
   }
+}
+
+window.onpopstate = function(event) {
+  //alert("location: " + document.location);
+  location.reload();
+}
 
 function expandItem(tagId, sender, type) {
 
