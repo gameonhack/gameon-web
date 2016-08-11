@@ -21,9 +21,6 @@ var request = require('request');
 
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
-    console.log('content-type:', res.headers['content-type']);
-    console.log('content-length:', res.headers['content-length']);
-
     request(uri).pipe(gohrouter.fs.createWriteStream(filename)).on('close', callback);
   });
 };
@@ -53,7 +50,7 @@ gohrouter.get('/design',function(req, res, next) {
   res.gohrender('design', { title: 'Design Guideline' })
 });
 
-function requestLogin(req, res, id, accessToken) {
+function requestLogin(req, res, id, accessToken, nextUrl) {
   var request = require('request');
   request.post({
     headers : {
@@ -75,7 +72,7 @@ function requestLogin(req, res, id, accessToken) {
 
       if (error == null) {
         req.session.user = user
-        return res.redirect("/profile")
+        return res.redirect(nextUrl)
 
       } else {
         return res.send('Not welcome!')
@@ -192,11 +189,10 @@ gohrouter.get('/login/callback',function(req, res, next) {
                             });
 
                             gohrouter.fs.unlinkSync(imageFile)
-                            requestLogin(req, res, facebookId, req.session.access_token)
+                            requestLogin(req, res, facebookId, req.session.access_token, "/profile/edit")
 
                           },
                           error: function(user, error) {
-                            console.log("NOT Hooray");
                             // Show the error message somewhere and let the user try again.
                             return res.send("Error: " + error.code + " " + error.message);
                           }
@@ -213,7 +209,7 @@ gohrouter.get('/login/callback',function(req, res, next) {
 
                   } else {
 
-                    return requestLogin(req, res, facebookId, req.session.access_token)
+                    return requestLogin(req, res, facebookId, req.session.access_token, "/profile")
 
                   }
 

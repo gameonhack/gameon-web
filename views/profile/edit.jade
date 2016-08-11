@@ -9,11 +9,11 @@ block content
     form(method="post" action="/profile/edit" enctype="multipart/form-data")
         
       div(class="crop-square whiteBorder circle-border")
-        img(class="" src=user.get("image")._url )
+        img(class="" id="userprofileImg" src=user.get("image")._url )
 
       div
         label(for="username") Foto
-        input(type="file" name="photo")
+        input(type="file" name="photo" onchange="handleFileSelect(event)")
       
       div
         label(for="username") Nombre
@@ -23,6 +23,10 @@ block content
         label(for="username") Username
         input(type="text", placeholder="Username", id="user", name="user" value="#{user.get('username')}")
       
+      div 
+        label(for="bio") Acerca de mi
+        textarea(name="bio" onkeyup="textAreaAdjust(this)" placeholder="Bio")= user.get('bio')
+        
       button(type="submit", class="default m-t-1") Save 
       
   //    

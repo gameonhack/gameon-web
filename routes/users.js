@@ -24,6 +24,7 @@ gohrouter.router.post('/edit',  gohrouter.upload.single('photo'), function(req, 
 
     user.set("name", req.body.name)
     user.set("username", req.body.user)
+    user.set("bio", req.body.bio)
 
     if (req.file != null) {
 
