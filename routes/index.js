@@ -21,6 +21,9 @@ var request = require('request');
 
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
     request(uri).pipe(gohrouter.fs.createWriteStream(filename)).on('close', callback);
   });
 };
@@ -50,7 +53,7 @@ gohrouter.get('/design',function(req, res, next) {
   res.gohrender('design', { title: 'Design Guideline' })
 });
 
-function requestLogin(req, res, id, accessToken, nextUrl) {
+function requestLogin(req, res, id, accessToken) {
   var request = require('request');
   request.post({
     headers : {
@@ -72,7 +75,7 @@ function requestLogin(req, res, id, accessToken, nextUrl) {
 
       if (error == null) {
         req.session.user = user
-        return res.redirect(nextUrl)
+        return res.redirect("/profile")
 
       } else {
         return res.send('Not welcome!')
@@ -138,9 +141,14 @@ gohrouter.get('/login/callback',function(req, res, next) {
                       parseFile.save().then(function() {
                         // The file has been saved to Parse.
 
+                        function rand(length,current){
+                          current = current ? current : '';
+                          return length ? rand( --length , "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz".charAt( Math.floor( Math.random() * 60 ) ) + current ) : current;
+                        }
+
                         var user = dataManager.NewUser();
                         user.set("username", facebookId);
-                        user.set("password", "mypass");
+                        user.set("password", rand(20,null) );
                         user.set("email", result.email);
 
                         var  authData = {
@@ -189,10 +197,11 @@ gohrouter.get('/login/callback',function(req, res, next) {
                             });
 
                             gohrouter.fs.unlinkSync(imageFile)
-                            requestLogin(req, res, facebookId, req.session.access_token, "/profile/edit")
+                            requestLogin(req, res, facebookId, req.session.access_token)
 
                           },
                           error: function(user, error) {
+                            console.log("NOT Hooray");
                             // Show the error message somewhere and let the user try again.
                             return res.send("Error: " + error.code + " " + error.message);
                           }
@@ -209,7 +218,7 @@ gohrouter.get('/login/callback',function(req, res, next) {
 
                   } else {
 
-                    return requestLogin(req, res, facebookId, req.session.access_token, "/profile")
+                    return requestLogin(req, res, facebookId, req.session.access_token)
 
                   }
 
